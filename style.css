@@ -30,6 +30,29 @@ a {
   text-decoration: none;
 }
 
+.hero-logo {
+  width: min(var(--max), 100%);
+  margin: 0 auto;
+  padding: 1rem 1.5rem 0;
+}
+
+.hero-logo img {
+  width: 100%;
+  max-height: 320px;
+  border-radius: 8px;
+  border: 1px solid #2b2119;
+  object-fit: cover;
+  object-position: center;
+}
+
+.navbar-logo,
+.footer-logo-img {
+  width: 120px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
 .navbar,
 .hero,
 .features,

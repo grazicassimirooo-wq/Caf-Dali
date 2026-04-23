@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700" role="img" aria-labelledby="title desc">
+  <title id="title">Logo Dali</title>
+  <desc id="desc">Marca Dali Café &amp; Experiências</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#1a120e"/>
+      <stop offset="100%" stop-color="#0b0806"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" x2="1">
+      <stop offset="0%" stop-color="#b8560f"/>
+      <stop offset="100%" stop-color="#e88a2d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="700" fill="url(#bg)"/>
+  <g transform="translate(190 180)">
+    <path d="M0 0 h180 c120 0 190 70 190 170s-70 170-190 170H0v-50h175c86 0 135-44 135-120s-49-120-135-120H0z" fill="none" stroke="url(#gold)" stroke-width="20"/>
+    <path d="M40 70 h130 c73 0 115 37 115 100s-42 100-115 100H40v-45h120c46 0 70-19 70-55s-24-55-70-55H40z" fill="none" stroke="url(#gold)" stroke-width="16"/>
+  </g>
+  <line x1="640" y1="170" x2="640" y2="520" stroke="#d97724" stroke-width="5"/>
+  <text x="720" y="300" fill="#f1e0ca" font-family="Inter, Arial, sans-serif" font-size="170" font-weight="500">Dali</text>
+  <text x="720" y="390" fill="#d97724" font-family="Inter, Arial, sans-serif" font-size="56" letter-spacing="8">CAFÉ &amp; EXPERIÊNCIAS</text>
+  <line x1="720" y1="435" x2="975" y2="435" stroke="#d97724" stroke-width="4"/>
+  <circle cx="1040" cy="435" r="15" fill="#d97724"/>
+  <line x1="1100" y1="435" x2="1355" y2="435" stroke="#d97724" stroke-width="4"/>
+</svg>
