@@ -342,8 +342,9 @@ nav ul {
 
 .boom-dali {
   display: grid;
-  grid-template-columns: 1fr 0.65fr;
+  grid-template-columns: 1.2fr 0.55fr 1fr 1fr;
   background: #090807;
+  min-height: 280px;
 }
 
 .boom-info,
@@ -368,28 +369,19 @@ nav ul {
   width: 180px;
 }
 
-.boom-usage {
-  width: min(var(--max), 100%);
-  margin: 0 auto;
+.boom-usage-text {
   background: #dfcfbe;
   color: #211c17;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 220px;
-}
-
-.boom-usage-text {
-  padding: 2.5rem 3rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.5rem;
 }
 
 .boom-usage-text p {
-  margin: 0.6rem 0 0;
+  margin: 0.6rem 0 1rem;
   line-height: 1.6;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 .boom-usage-img {
@@ -511,13 +503,12 @@ footer {
   .highlight-product,
   .split-section,
   .boom-dali,
-  .boom-usage,
   .footer-cta {
     grid-template-columns: 1fr;
   }
 
   .boom-usage-img {
-    min-height: 220px;
+    min-height: 200px;
   }
 
   .hero {
