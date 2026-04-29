@@ -38,8 +38,7 @@ a {
 .boom-dali,
 .footer-cta,
 footer {
-  width: min(var(--max), 100%);
-  margin: 0 auto;
+  width: 100%;
 }
 
 .navbar {
@@ -97,8 +96,9 @@ nav ul {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(105deg, rgba(6,4,2,0.82) 0%, rgba(6,4,2,0.55) 50%, rgba(6,4,2,0.1) 100%),
-    linear-gradient(to top, rgba(6,4,2,0.9) 0%, transparent 18%);
+    linear-gradient(105deg, rgba(6,4,2,0.85) 0%, rgba(6,4,2,0.5) 55%, rgba(6,4,2,0.0) 100%),
+    linear-gradient(to top,  rgba(6,4,2,1.0) 0%, transparent 22%),
+    linear-gradient(to left, rgba(6,4,2,1.0) 0%, transparent 22%);
 }
 
 .hero-wm-cover {
