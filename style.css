@@ -301,8 +301,9 @@ nav ul {
 
 .split-section {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1.1fr 1fr 1.2fr;
   background: #0d0b0a;
+  min-height: 340px;
 }
 
 .split-img {
@@ -325,7 +326,21 @@ nav ul {
 
 .split-left,
 .split-right {
-  padding: 2rem;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.split-left .subtitle,
+.split-right .subtitle {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.split-right .food-list li {
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .icon-list,
