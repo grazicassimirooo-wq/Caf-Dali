@@ -96,12 +96,9 @@ nav ul {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    105deg,
-    rgba(6, 4, 2, 0.82) 0%,
-    rgba(6, 4, 2, 0.55) 50%,
-    rgba(6, 4, 2, 0.1) 100%
-  );
+  background:
+    linear-gradient(105deg, rgba(6,4,2,0.82) 0%, rgba(6,4,2,0.55) 50%, rgba(6,4,2,0.1) 100%),
+    linear-gradient(to top, rgba(6,4,2,0.9) 0%, transparent 18%);
 }
 
 .hero-content {
@@ -135,6 +132,9 @@ nav ul {
 
 .hero .btn-primary {
   animation: heroReveal 1.4s 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  padding: 0.55rem 1rem;
+  font-size: 0.7rem;
+  align-self: flex-start;
 }
 
 .hero h1,
