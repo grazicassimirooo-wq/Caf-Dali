@@ -1,0 +1,18 @@
+{
+  "name": "Dali - Mais que café",
+  "short_name": "Dali",
+  "description": "Mais que café, um encontro.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060504",
+  "theme_color": "#e57200",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "images/logo (2).png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
