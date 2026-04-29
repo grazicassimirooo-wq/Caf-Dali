@@ -399,6 +399,35 @@ footer {
   color: var(--accent);
 }
 
+.top-banner {
+  background: #060504;
+  border-bottom: 1px solid #2b2623;
+  padding: 1.2rem 1.5rem;
+}
+
+.top-banner-inner {
+  width: min(var(--max), 100%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.top-logo img {
+  width: 120px;
+  display: block;
+}
+
+.top-tagline {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.8rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
 @media (max-width: 1024px) {
   nav { display: none; }
 
@@ -424,5 +453,11 @@ footer {
   footer {
     flex-direction: column;
     text-align: center;
+  }
+
+  .top-banner-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
   }
 }
