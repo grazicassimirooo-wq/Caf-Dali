@@ -190,6 +190,9 @@ nav ul {
   padding: 3rem;
   gap: 2rem;
   background: #0a0908;
+  position: relative;
+  z-index: 2;
+  margin-top: -72px;
 }
 
 .subtitle {
