@@ -603,7 +603,10 @@ footer {
   nav { display: none; }
 
   .hero { aspect-ratio: 16 / 9; }
-  .hero-content { max-width: 80%; padding: 0 5%; }
+  .hero-content {
+    max-width: 80%;
+    padding: 0 5%;
+  }
 
   .features {
     grid-template-columns: 1fr;
@@ -635,10 +638,18 @@ footer {
 
   .navbar { padding: 0.75rem 1rem; }
 
-  .hero { aspect-ratio: 4 / 3; }
-  .hero-content { max-width: 90%; padding: 0 5%; }
-  .hero h1 { font-size: clamp(1.6rem, 6vw, 2.8rem); }
-  .hero p { font-size: clamp(0.85rem, 2.5vw, 1.1rem); }
+  .hero {
+    aspect-ratio: unset;
+    min-height: 92svh;
+    min-height: 92vh;
+  }
+  .hero-content {
+    max-width: 92%;
+    padding: 5rem 5% 3rem;
+    justify-content: flex-end;
+  }
+  .hero h1 { font-size: clamp(1.7rem, 6vw, 2.8rem); }
+  .hero p  { font-size: clamp(0.9rem, 2.8vw, 1.1rem); }
 
   .features,
   .highlight-product,
@@ -668,9 +679,19 @@ footer {
 
 /* ── Mobile pequeno (≤480px) ── */
 @media (max-width: 480px) {
-  .hero { aspect-ratio: 1 / 1; }
-  .hero-content { max-width: 100%; padding: 0 1.2rem; }
-  .hero h1 { font-size: clamp(1.4rem, 7vw, 2rem); }
+  .hero {
+    aspect-ratio: unset;
+    min-height: 100svh;
+    min-height: 100vh;
+  }
+  .hero-content {
+    max-width: 100%;
+    padding: 4.5rem 1.2rem 2.5rem;
+    justify-content: flex-end;
+  }
+  .hero h1 { font-size: clamp(1.4rem, 7.5vw, 1.9rem); }
+  .hero p  { font-size: 0.9rem; margin-bottom: 1.4rem; }
+  .hero .btn-primary { align-self: stretch; justify-content: center; }
 
   .top-tagline { font-size: 0.75rem; }
 
