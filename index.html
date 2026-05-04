@@ -20,6 +20,8 @@
 </head>
 <body>
 
+  <div id="scroll-progress"></div>
+
   <div class="top-banner">
     <div class="top-banner-inner">
       <div class="top-logo">
@@ -33,17 +35,41 @@
     <div class="logo">
       <img src="images/logo (2).png" alt="Dali Logo">
     </div>
-    <nav>
+    <nav id="main-nav">
       <ul>
-        <li><a href="#">Menu Degustação</a></li>
-        <li><a href="#">Lanches</a></li>
-        <li><a href="#">Boom Dali</a></li>
-        <li><a href="#">Sobre Nós</a></li>
-        <li><a href="#">Contato</a></li>
+        <li><a href="#menu">Menu Degustação</a></li>
+        <li><a href="#lanches">Lanches</a></li>
+        <li><a href="#boom">Boom Dali</a></li>
+        <li><a href="#contato">Contato</a></li>
       </ul>
     </nav>
-    <a href="#" class="btn-primary">Faça seu pedido <i class="fa-brands fa-whatsapp"></i></a>
+    <a href="#contato" class="btn-primary desktop-cta">Faça seu pedido <i class="fa-brands fa-whatsapp"></i></a>
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
   </header>
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-overlay" id="mobile-overlay"></div>
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-close" id="mobile-close" aria-label="Fechar menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="mobile-menu-logo">
+      <img src="images/logo (2).png" alt="Dali Logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#menu" class="mobile-link">Menu Degustação</a></li>
+        <li><a href="#lanches" class="mobile-link">Lanches</a></li>
+        <li><a href="#boom" class="mobile-link">Boom Dali</a></li>
+        <li><a href="#contato" class="mobile-link">Contato</a></li>
+      </ul>
+    </nav>
+    <a href="#contato" class="btn-primary mobile-menu-cta mobile-link">
+      Faça seu pedido <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </div>
 
   <section class="hero">
     <video class="hero-video" autoplay muted loop playsinline>
@@ -55,18 +81,18 @@
       <h1>Mais que <span class="highlight">café</span>,<br> um <span class="highlight">encontro.</span></h1>
       <div class="divider"></div>
       <p>Sabores que acolhem.<br>Texturas que envolvem.<br>Um momento só seu<br>ou para compartilhar.</p>
-      <a href="#" class="btn-primary"><i class="fa-solid fa-mug-hot"></i> Quero Experimentar</a>
+      <a href="#menu" class="btn-primary btn-pulse"><i class="fa-solid fa-mug-hot"></i> Quero Experimentar</a>
     </div>
   </section>
 
-  <section class="features">
+  <section class="features reveal" id="menu">
     <div class="features-text">
       <span class="subtitle">MENU DEGUSTAÇÃO DALI</span>
       <h2>Um novo jeito de viver o café da manhã e o lanche da tarde.</h2>
       <p>Criamos o Menu Degustação Dali para transformar pausas simples em experiências memoráveis. Cada item foi pensado para equilibrar nutrição, leveza e prazer.</p>
       <p class="signature">Tudo fácil pra você.</p>
     </div>
-    <div class="features-grid">
+    <div class="features-grid reveal-stagger">
       <div class="feature-item">
         <i class="fa-solid fa-mug-saucer icon-gold"></i>
         <h3>SABOR</h3>
@@ -85,7 +111,7 @@
     </div>
   </section>
 
-  <section class="highlight-product">
+  <section class="highlight-product reveal">
     <div class="product-image">
       <img src="images/Capuccino.png" alt="Capuccino">
     </div>
@@ -96,25 +122,31 @@
     </div>
   </section>
 
-  <section class="combinations">
+  <section class="combinations reveal">
     <h2 class="section-title dark-text">COMBINAÇÕES QUE ENCANTAM</h2>
-    <div class="cards-grid">
+    <div class="cards-grid reveal-stagger">
       <div class="card">
-        <img src="images/biscoito de arroz com geleia de frutas vermelhas.png" alt="Biscoito de Arroz">
+        <div class="card-img-wrap">
+          <img src="images/biscoito de arroz com geleia de frutas vermelhas.png" alt="Biscoito de Arroz">
+        </div>
         <p>Biscoito de arroz com<br>geleia de frutas vermelhas</p>
       </div>
       <div class="card">
-        <img src="images/torrada-cacau.jpg.png" alt="Torrada de Cacau">
+        <div class="card-img-wrap">
+          <img src="images/torrada-cacau.jpg.png" alt="Torrada de Cacau">
+        </div>
         <p>Torrada de cacau com<br>creme de amendoim</p>
       </div>
       <div class="card">
-        <img src="images/biscoitos.jpg.png" alt="Seleção Biscoitos">
+        <div class="card-img-wrap">
+          <img src="images/biscoitos.jpg.png" alt="Seleção Biscoitos">
+        </div>
         <p>Seleção de biscoitos<br>artesanais</p>
       </div>
     </div>
   </section>
 
-  <section class="split-section">
+  <section class="split-section reveal" id="lanches">
     <div class="split-left">
       <span class="subtitle">FRESCOR & ENERGIA</span>
       <ul class="icon-list">
@@ -130,16 +162,16 @@
     <div class="split-right">
       <span class="subtitle">PARA O DIA A DIA</span>
       <ul class="food-list">
-        <li><img src="https://placehold.co/50x30/444/777" alt="Sanduiche"> Bisnaguinha de cenoura com creme de avelã</li>
-        <li><img src="https://placehold.co/50x30/444/777" alt="Sanduiche"> Bisnaguinha integral com creme de queijo e ervas</li>
-        <li><img src="https://placehold.co/50x30/444/777" alt="Sanduiche"> Bisnaguinha com patê</li>
-        <li><img src="https://placehold.co/50x30/444/777" alt="Sanduiche"> Baguete de leite com salpicão</li>
-        <li><img src="https://placehold.co/50x30/444/777" alt="Sanduiche"> Baguete natural (peito de peru, queijo, alface e tomate)</li>
+        <li><i class="fa-solid fa-bread-slice food-icon"></i> Bisnaguinha de cenoura com creme de avelã</li>
+        <li><i class="fa-solid fa-bread-slice food-icon"></i> Bisnaguinha integral com creme de queijo e ervas</li>
+        <li><i class="fa-solid fa-bread-slice food-icon"></i> Bisnaguinha com patê</li>
+        <li><i class="fa-solid fa-wheat-awn food-icon"></i> Baguete de leite com salpicão</li>
+        <li><i class="fa-solid fa-wheat-awn food-icon"></i> Baguete natural (peito de peru, queijo, alface e tomate)</li>
       </ul>
     </div>
   </section>
 
-  <section class="boom-dali">
+  <section class="boom-dali reveal" id="boom">
     <div class="boom-info">
       <span class="subtitle">O QUERIDINHO DA DALI</span>
       <h2>BOOM Dali</h2>
@@ -168,9 +200,13 @@
     </div>
   </section>
 
-  <section class="footer-cta">
+  <section class="footer-cta reveal" id="contato">
     <div class="store-image">
-      <img src="https://placehold.co/400x300/222/555?text=Loja+Fisica" alt="Interior Loja Dali">
+      <div class="store-visual">
+        <i class="fa-solid fa-mug-hot"></i>
+        <p>Um espaço feito<br>para você</p>
+        <span class="store-tagline">Venha nos visitar</span>
+      </div>
     </div>
     <div class="cta-text">
       <h2>MAIS QUE ALIMENTOS,<br>MOMENTOS.</h2>
@@ -179,11 +215,11 @@
     </div>
     <div class="cta-box">
       <h3>PRONTA PARA VIVER ESSA EXPERIÊNCIA?</h3>
-      <ul>
-        <li><i class="fa-solid fa-box"></i> Monte seu momento Dali</li>
-        <li><i class="fa-brands fa-whatsapp"></i> Peça agora pelo WhatsApp</li>
+      <ul class="check-list">
+        <li><i class="fa-solid fa-box highlight"></i> Monte seu momento Dali</li>
+        <li><i class="fa-brands fa-whatsapp highlight"></i> Peça agora pelo WhatsApp</li>
       </ul>
-      <a href="#" class="btn-primary">FAÇA SEU PEDIDO <i class="fa-brands fa-whatsapp"></i></a>
+      <a href="#" class="btn-primary btn-pulse">FAÇA SEU PEDIDO <i class="fa-brands fa-whatsapp"></i></a>
     </div>
   </section>
 
@@ -193,12 +229,14 @@
     </div>
     <div class="socials">
       <span>SIGA A DALI</span>
-      <a href="#"><i class="fa-brands fa-instagram"></i></a>
-      <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
     </div>
     <div class="credits">
       FEITO COM <i class="fa-solid fa-heart"></i> PARA VOCÊ
     </div>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
