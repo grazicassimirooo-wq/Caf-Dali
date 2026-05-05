@@ -20,6 +20,8 @@
 </head>
 <body>
 
+  <div id="scroll-progress"></div>
+
   <div class="top-banner">
     <div class="top-banner-inner">
       <div class="top-logo">
@@ -36,34 +38,39 @@
     <nav id="main-nav">
       <ul>
         <li><a href="#valores">Menu Degustação</a></li>
-        <li><a href="#combinacoes">Lanches</a></li>
+        <li><a href="#lanches">Lanches</a></li>
         <li><a href="#boom">Boom Dali</a></li>
         <li><a href="#historia">Sobre Nós</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
     </nav>
-    <div class="navbar-right">
-      <a href="#contato" class="btn-primary">Faça seu pedido <i class="fa-brands fa-whatsapp"></i></a>
-      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+    <a href="#contato" class="btn-primary desktop-cta">Faça seu pedido <i class="fa-brands fa-whatsapp"></i></a>
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
-  <!-- Mobile nav drawer -->
-  <div class="mobile-nav-overlay" id="mobile-overlay"></div>
-  <div class="mobile-nav" id="mobile-nav">
-    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Fechar menu">
+  <!-- Mobile menu overlay -->
+  <div class="mobile-overlay" id="mobile-overlay"></div>
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-close" id="mobile-close" aria-label="Fechar menu">
       <i class="fa-solid fa-xmark"></i>
     </button>
-    <ul>
-      <li><a href="#valores" class="mobile-nav-link">Menu Degustação</a></li>
-      <li><a href="#combinacoes" class="mobile-nav-link">Lanches</a></li>
-      <li><a href="#boom" class="mobile-nav-link">Boom Dali</a></li>
-      <li><a href="#historia" class="mobile-nav-link">Sobre Nós</a></li>
-      <li><a href="#contato" class="mobile-nav-link">Contato</a></li>
-      <li><a href="#contato" class="btn-primary mobile-cta">Faça seu pedido <i class="fa-brands fa-whatsapp"></i></a></li>
-    </ul>
+    <div class="mobile-menu-logo">
+      <img src="images/logo (2).png" alt="Dali Logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#valores" class="mobile-link">Menu Degustação</a></li>
+        <li><a href="#lanches" class="mobile-link">Lanches</a></li>
+        <li><a href="#boom" class="mobile-link">Boom Dali</a></li>
+        <li><a href="#historia" class="mobile-link">Sobre Nós</a></li>
+        <li><a href="#contato" class="mobile-link">Contato</a></li>
+      </ul>
+    </nav>
+    <a href="#contato" class="btn-primary mobile-menu-cta mobile-link">
+      Faça seu pedido <i class="fa-brands fa-whatsapp"></i>
+    </a>
   </div>
 
   <section class="hero">
@@ -76,18 +83,18 @@
       <h1 id="hero-headline">Mais que <span class="highlight">café</span>,<br> um <span class="highlight">encontro.</span></h1>
       <div class="divider"></div>
       <p id="hero-subtitle">Sabores que acolhem.<br>Texturas que envolvem.<br>Um momento só seu<br>ou para compartilhar.</p>
-      <a href="#contato" class="btn-primary"><i class="fa-solid fa-mug-hot"></i> <span id="hero-btn-text">Quero Experimentar</span></a>
+      <a href="#contato" class="btn-primary btn-pulse"><i class="fa-solid fa-mug-hot"></i> <span id="hero-btn-text">Quero Experimentar</span></a>
     </div>
   </section>
 
-  <section class="features" id="valores">
+  <section class="features reveal" id="valores">
     <div class="features-text">
       <span class="subtitle" id="v-sec-sub">MENU DEGUSTAÇÃO DALI</span>
       <h2 id="v-sec-title">Um novo jeito de viver o café da manhã e o lanche da tarde.</h2>
       <p id="v-sec-desc">Criamos o Menu Degustação Dali para transformar pausas simples em experiências memoráveis. Cada item foi pensado para equilibrar nutrição, leveza e prazer.</p>
       <p class="signature" id="v-sec-sig">Tudo fácil pra você.</p>
     </div>
-    <div class="features-grid">
+    <div class="features-grid reveal-stagger">
       <div class="feature-item">
         <i id="v-1-icon" class="fa-solid fa-mug-saucer icon-gold"></i>
         <h3 id="v-1-title">SABOR</h3>
@@ -126,7 +133,7 @@
     </div>
   </section>
 
-  <section class="highlight-product">
+  <section class="highlight-product reveal">
     <div class="product-image">
       <img src="images/Capuccino.png" alt="Capuccino">
     </div>
@@ -137,25 +144,31 @@
     </div>
   </section>
 
-  <section class="combinations" id="combinacoes">
+  <section class="combinations reveal" id="combinacoes">
     <h2 class="section-title dark-text" id="c-title">COMBINAÇÕES QUE ENCANTAM</h2>
-    <div class="cards-grid">
+    <div class="cards-grid reveal-stagger">
       <div class="card">
-        <img src="images/biscoito de arroz com geleia de frutas vermelhas.png" alt="Biscoito de Arroz">
+        <div class="card-img-wrap">
+          <img src="images/biscoito de arroz com geleia de frutas vermelhas.png" alt="Biscoito de Arroz">
+        </div>
         <p id="c-1-name">Biscoito de arroz com<br>geleia de frutas vermelhas</p>
       </div>
       <div class="card">
-        <img src="images/torrada-cacau.jpg.png" alt="Torrada de Cacau">
+        <div class="card-img-wrap">
+          <img src="images/torrada-cacau.jpg.png" alt="Torrada de Cacau">
+        </div>
         <p id="c-2-name">Torrada de cacau com<br>creme de amendoim</p>
       </div>
       <div class="card">
-        <img src="images/biscoitos.jpg.png" alt="Seleção Biscoitos">
+        <div class="card-img-wrap">
+          <img src="images/biscoitos.jpg.png" alt="Seleção Biscoitos">
+        </div>
         <p id="c-3-name">Seleção de biscoitos<br>artesanais</p>
       </div>
     </div>
   </section>
 
-  <section class="split-section">
+  <section class="split-section reveal" id="lanches">
     <div class="split-left">
       <span class="subtitle" id="frescor-title">FRESCOR &amp; ENERGIA</span>
       <ul class="icon-list" id="frescor-list">
@@ -170,17 +183,17 @@
     </div>
     <div class="split-right">
       <span class="subtitle" id="diaadia-title">PARA O DIA A DIA</span>
-      <ul class="food-list" id="diaadia-list">
-        <li><img src="https://placehold.co/50x30/444/777" alt=""> <span id="d-1">Bisnaguinha de cenoura com creme de avelã</span></li>
-        <li><img src="https://placehold.co/50x30/444/777" alt=""> <span id="d-2">Bisnaguinha integral com creme de queijo e ervas</span></li>
-        <li><img src="https://placehold.co/50x30/444/777" alt=""> <span id="d-3">Bisnaguinha com patê</span></li>
-        <li><img src="https://placehold.co/50x30/444/777" alt=""> <span id="d-4">Baguete de leite com salpicão</span></li>
-        <li><img src="https://placehold.co/50x30/444/777" alt=""> <span id="d-5">Baguete natural (peito de peru, queijo, alface e tomate)</span></li>
+      <ul class="food-list">
+        <li><i class="fa-solid fa-bread-slice food-icon"></i> <span id="d-1">Bisnaguinha de cenoura com creme de avelã</span></li>
+        <li><i class="fa-solid fa-bread-slice food-icon"></i> <span id="d-2">Bisnaguinha integral com creme de queijo e ervas</span></li>
+        <li><i class="fa-solid fa-bread-slice food-icon"></i> <span id="d-3">Bisnaguinha com patê</span></li>
+        <li><i class="fa-solid fa-wheat-awn food-icon"></i> <span id="d-4">Baguete de leite com salpicão</span></li>
+        <li><i class="fa-solid fa-wheat-awn food-icon"></i> <span id="d-5">Baguete natural (peito de peru, queijo, alface e tomate)</span></li>
       </ul>
     </div>
   </section>
 
-  <section class="boom-dali" id="boom">
+  <section class="boom-dali reveal" id="boom">
     <div class="boom-info">
       <span class="subtitle">O QUERIDINHO DA DALI</span>
       <h2>BOOM Dali</h2>
@@ -209,9 +222,13 @@
     </div>
   </section>
 
-  <section class="footer-cta" id="contato">
+  <section class="footer-cta reveal" id="contato">
     <div class="store-image">
-      <img src="https://placehold.co/400x300/222/555?text=Loja+Fisica" alt="Interior Loja Dali">
+      <div class="store-visual">
+        <i class="fa-solid fa-mug-hot"></i>
+        <p>Um espaço feito<br>para você</p>
+        <span class="store-tagline">Venha nos visitar</span>
+      </div>
     </div>
     <div class="cta-text">
       <h2 id="cta-title">MAIS QUE ALIMENTOS,<br>MOMENTOS.</h2>
@@ -220,11 +237,11 @@
     </div>
     <div class="cta-box">
       <h3>PRONTA PARA VIVER ESSA EXPERIÊNCIA?</h3>
-      <ul>
-        <li><i class="fa-solid fa-box"></i> Monte seu momento Dali</li>
-        <li><i class="fa-brands fa-whatsapp"></i> Peça agora pelo WhatsApp</li>
+      <ul class="check-list">
+        <li><i class="fa-solid fa-box highlight"></i> Monte seu momento Dali</li>
+        <li><i class="fa-brands fa-whatsapp highlight"></i> Peça agora pelo WhatsApp</li>
       </ul>
-      <a href="#" class="btn-primary">FAÇA SEU PEDIDO <i class="fa-brands fa-whatsapp"></i></a>
+      <a href="#" class="btn-primary btn-pulse">FAÇA SEU PEDIDO <i class="fa-brands fa-whatsapp"></i></a>
     </div>
   </section>
 
@@ -234,48 +251,24 @@
     </div>
     <div class="socials">
       <span>SIGA A DALI</span>
-      <a href="#"><i class="fa-brands fa-instagram"></i></a>
-      <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
     </div>
     <div class="credits">
       FEITO COM <i class="fa-solid fa-heart"></i> PARA VOCÊ
     </div>
   </footer>
 
+  <script src="script.js"></script>
   <script>
-    // ── Service Worker registration ──
+    // Service Worker registration
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js').catch(() => {});
       });
     }
 
-    // ── Mobile hamburger menu ──
-    const hamburger = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobile-nav');
-    const mobileOverlay = document.getElementById('mobile-overlay');
-    const mobileClose = document.getElementById('mobile-nav-close');
-
-    function openMobileNav() {
-      mobileNav.classList.add('open');
-      mobileOverlay.classList.add('open');
-      hamburger.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeMobileNav() {
-      mobileNav.classList.remove('open');
-      mobileOverlay.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
-
-    hamburger.addEventListener('click', openMobileNav);
-    mobileClose.addEventListener('click', closeMobileNav);
-    mobileOverlay.addEventListener('click', closeMobileNav);
-    document.querySelectorAll('.mobile-nav-link, .mobile-cta').forEach(l => l.addEventListener('click', closeMobileNav));
-
-    // ── Dynamic content from localStorage (populated by admin panel) ──
+    // Dynamic content from localStorage (populated by admin panel)
     (function loadDaliContent() {
       let data;
       try { data = JSON.parse(localStorage.getItem('dali-data') || '{}'); } catch { return; }
@@ -290,7 +283,6 @@
         if (el && val !== undefined && val !== '') el.innerHTML = val;
       }
 
-      // Geral
       const g = data.geral;
       if (g) {
         setText('tagline', g.tagline);
@@ -305,7 +297,6 @@
         setText('cta-sig', g.ctaSig);
       }
 
-      // Historia
       const h = data.historia;
       if (h) {
         setText('h-subtitle', h.subtitle);
@@ -319,7 +310,6 @@
         setText('h-sig', h.sig);
       }
 
-      // Valores
       const v = data.valores;
       if (v) {
         setText('v-sec-sub', v.secSub);
@@ -330,16 +320,13 @@
           v.items.forEach((item, i) => {
             const n = i + 1;
             const iconEl = document.getElementById(`v-${n}-icon`);
-            if (iconEl && item.icon) {
-              iconEl.className = `fa-solid ${item.icon} icon-gold`;
-            }
+            if (iconEl && item.icon) iconEl.className = `fa-solid ${item.icon} icon-gold`;
             setText(`v-${n}-title`, item.title);
             setText(`v-${n}-desc`, item.desc);
           });
         }
       }
 
-      // Combinações
       const c = data.combinacoes;
       if (c) {
         setText('c-title', c.title);
@@ -351,7 +338,6 @@
         }
       }
 
-      // Cardápio
       const k = data.cardapio;
       if (k) {
         if (k.frescor) {
