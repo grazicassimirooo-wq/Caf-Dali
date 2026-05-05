@@ -17,6 +17,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Firebase SDK (carregado async para não bloquear renderização) -->
+  <script async src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js" id="fb-app"></script>
+  <script async src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js" id="fb-db"></script>
 </head>
 <body>
 
@@ -257,21 +260,23 @@
     <div class="credits">
       FEITO COM <i class="fa-solid fa-heart"></i> PARA VOCÊ
     </div>
+    <a href="admin.html" class="admin-access-link" aria-label="Acesso administrativo" title="Painel Admin">
+      <i class="fa-solid fa-gear"></i>
+    </a>
   </footer>
 
+  <script src="firebase-config.js"></script>
   <script src="script.js"></script>
   <script>
-    // Service Worker registration
+    // Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js').catch(() => {});
       });
     }
 
-    // Dynamic content from localStorage (populated by admin panel)
-    (function loadDaliContent() {
-      let data;
-      try { data = JSON.parse(localStorage.getItem('dali-data') || '{}'); } catch { return; }
+    // ── Content renderer ──────────────────────────────────────────────────────
+    function applyDaliContent(data) {
       if (!data || !Object.keys(data).length) return;
 
       function setText(id, val) {
@@ -303,57 +308,73 @@
         setText('h-title', h.title);
         if (h.text) {
           const el = document.getElementById('h-text');
-          if (el) {
-            el.innerHTML = h.text.split('\n\n').map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
-          }
+          if (el) el.innerHTML = h.text.split('\n\n')
+            .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
         }
         setText('h-sig', h.sig);
       }
 
       const v = data.valores;
       if (v) {
-        setText('v-sec-sub', v.secSub);
+        setText('v-sec-sub',   v.secSub);
         setText('v-sec-title', v.secTitle);
-        setText('v-sec-desc', v.secDesc);
-        setText('v-sec-sig', v.secSig);
-        if (v.items) {
-          v.items.forEach((item, i) => {
-            const n = i + 1;
-            const iconEl = document.getElementById(`v-${n}-icon`);
-            if (iconEl && item.icon) iconEl.className = `fa-solid ${item.icon} icon-gold`;
-            setText(`v-${n}-title`, item.title);
-            setText(`v-${n}-desc`, item.desc);
-          });
-        }
+        setText('v-sec-desc',  v.secDesc);
+        setText('v-sec-sig',   v.secSig);
+        if (v.items) v.items.forEach((item, i) => {
+          const n = i + 1;
+          const iconEl = document.getElementById(`v-${n}-icon`);
+          if (iconEl && item.icon) iconEl.className = `fa-solid ${item.icon} icon-gold`;
+          setText(`v-${n}-title`, item.title);
+          setText(`v-${n}-desc`,  item.desc);
+        });
       }
 
       const c = data.combinacoes;
       if (c) {
         setText('c-title', c.title);
-        if (c.items) {
-          c.items.forEach((item, i) => {
-            const el = document.getElementById(`c-${i + 1}-name`);
-            if (el && item.name) el.innerHTML = item.name.replace(/\n/g, '<br>');
-          });
-        }
+        if (c.items) c.items.forEach((item, i) => {
+          const el = document.getElementById(`c-${i + 1}-name`);
+          if (el && item.name) el.innerHTML = item.name.replace(/\n/g, '<br>');
+        });
       }
 
       const k = data.cardapio;
       if (k) {
         if (k.frescor) {
           const list = document.getElementById('frescor-list');
-          if (list) {
-            list.innerHTML = k.frescor.map(item =>
-              `<li><i class="fa-solid ${item.icon || 'fa-circle-dot'}"></i> ${item.name}</li>`
-            ).join('');
-          }
+          if (list) list.innerHTML = k.frescor
+            .map(item => `<li><i class="fa-solid ${item.icon || 'fa-circle-dot'}"></i> ${item.name}</li>`)
+            .join('');
         }
         setText('frescor-info', k.frescorInfo);
-        if (k.diaDia) {
-          k.diaDia.forEach((name, i) => setText(`d-${i + 1}`, name));
-        }
+        if (k.diaDia) k.diaDia.forEach((name, i) => setText(`d-${i + 1}`, name));
       }
-    })();
+    }
+
+    // ── Load from Firebase or localStorage ───────────────────────────────────
+    function initContentLoader() {
+      if (window.FIREBASE_CONFIGURED && window.CONTENT_DOC) {
+        // Real-time sync via Firestore — updates automatically when admin saves
+        window.CONTENT_DOC.onSnapshot(
+          snap => { if (snap.exists) applyDaliContent(snap.data()); },
+          () => {
+            // Firestore unavailable: fall back to localStorage
+            try { applyDaliContent(JSON.parse(localStorage.getItem('dali-data') || '{}')); } catch {}
+          }
+        );
+      } else {
+        // Firebase not configured: use localStorage fallback
+        try { applyDaliContent(JSON.parse(localStorage.getItem('dali-data') || '{}')); } catch {}
+      }
+    }
+
+    // Wait for Firebase SDK to be ready before initialising
+    if (window.FIREBASE_CONFIGURED) {
+      initContentLoader();
+    } else {
+      // Firebase SDK may still be loading async — retry after DOMContentLoaded
+      document.addEventListener('DOMContentLoaded', initContentLoader);
+    }
   </script>
 </body>
 </html>
