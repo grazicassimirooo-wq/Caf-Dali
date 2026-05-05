@@ -25,7 +25,7 @@
       <div class="top-logo">
         <img src="images/logo (2).png" alt="Dali Logo">
       </div>
-      <p class="top-tagline">MAIS QUE CAFÉ, UM ENCONTRO</p>
+      <p class="top-tagline" id="tagline">MAIS QUE CAFÉ, UM ENCONTRO</p>
     </div>
   </div>
 
@@ -33,17 +33,38 @@
     <div class="logo">
       <img src="images/logo (2).png" alt="Dali Logo">
     </div>
-    <nav>
+    <nav id="main-nav">
       <ul>
-        <li><a href="#">Menu Degustação</a></li>
-        <li><a href="#">Lanches</a></li>
-        <li><a href="#">Boom Dali</a></li>
-        <li><a href="#">Sobre Nós</a></li>
-        <li><a href="#">Contato</a></li>
+        <li><a href="#valores">Menu Degustação</a></li>
+        <li><a href="#combinacoes">Lanches</a></li>
+        <li><a href="#boom">Boom Dali</a></li>
+        <li><a href="#historia">Sobre Nós</a></li>
+        <li><a href="#contato">Contato</a></li>
       </ul>
     </nav>
-    <a href="#" class="btn-primary">Faça seu pedido <i class="fa-brands fa-whatsapp"></i></a>
+    <div class="navbar-right">
+      <a href="#contato" class="btn-primary">Faça seu pedido <i class="fa-brands fa-whatsapp"></i></a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
+
+  <!-- Mobile nav drawer -->
+  <div class="mobile-nav-overlay" id="mobile-overlay"></div>
+  <div class="mobile-nav" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Fechar menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <ul>
+      <li><a href="#valores" class="mobile-nav-link">Menu Degustação</a></li>
+      <li><a href="#combinacoes" class="mobile-nav-link">Lanches</a></li>
+      <li><a href="#boom" class="mobile-nav-link">Boom Dali</a></li>
+      <li><a href="#historia" class="mobile-nav-link">Sobre Nós</a></li>
+      <li><a href="#contato" class="mobile-nav-link">Contato</a></li>
+      <li><a href="#contato" class="btn-primary mobile-cta">Faça seu pedido <i class="fa-brands fa-whatsapp"></i></a></li>
+    </ul>
+  </div>
 
   <section class="hero">
     <video class="hero-video" autoplay muted loop playsinline>
@@ -52,35 +73,55 @@
     <div class="hero-overlay"></div>
     <div class="hero-wm-cover"></div>
     <div class="hero-content">
-      <h1>Mais que <span class="highlight">café</span>,<br> um <span class="highlight">encontro.</span></h1>
+      <h1 id="hero-headline">Mais que <span class="highlight">café</span>,<br> um <span class="highlight">encontro.</span></h1>
       <div class="divider"></div>
-      <p>Sabores que acolhem.<br>Texturas que envolvem.<br>Um momento só seu<br>ou para compartilhar.</p>
-      <a href="#" class="btn-primary"><i class="fa-solid fa-mug-hot"></i> Quero Experimentar</a>
+      <p id="hero-subtitle">Sabores que acolhem.<br>Texturas que envolvem.<br>Um momento só seu<br>ou para compartilhar.</p>
+      <a href="#contato" class="btn-primary"><i class="fa-solid fa-mug-hot"></i> <span id="hero-btn-text">Quero Experimentar</span></a>
     </div>
   </section>
 
-  <section class="features">
+  <section class="features" id="valores">
     <div class="features-text">
-      <span class="subtitle">MENU DEGUSTAÇÃO DALI</span>
-      <h2>Um novo jeito de viver o café da manhã e o lanche da tarde.</h2>
-      <p>Criamos o Menu Degustação Dali para transformar pausas simples em experiências memoráveis. Cada item foi pensado para equilibrar nutrição, leveza e prazer.</p>
-      <p class="signature">Tudo fácil pra você.</p>
+      <span class="subtitle" id="v-sec-sub">MENU DEGUSTAÇÃO DALI</span>
+      <h2 id="v-sec-title">Um novo jeito de viver o café da manhã e o lanche da tarde.</h2>
+      <p id="v-sec-desc">Criamos o Menu Degustação Dali para transformar pausas simples em experiências memoráveis. Cada item foi pensado para equilibrar nutrição, leveza e prazer.</p>
+      <p class="signature" id="v-sec-sig">Tudo fácil pra você.</p>
     </div>
     <div class="features-grid">
       <div class="feature-item">
-        <i class="fa-solid fa-mug-saucer icon-gold"></i>
-        <h3>SABOR</h3>
-        <p>Ingredientes selecionados para despertar sentidos.</p>
+        <i id="v-1-icon" class="fa-solid fa-mug-saucer icon-gold"></i>
+        <h3 id="v-1-title">SABOR</h3>
+        <p id="v-1-desc">Ingredientes selecionados para despertar sentidos.</p>
       </div>
       <div class="feature-item">
-        <i class="fa-regular fa-heart icon-gold"></i>
-        <h3>NUTRIÇÃO</h3>
-        <p>Escolhas saudáveis que nutrem o corpo e a alma.</p>
+        <i id="v-2-icon" class="fa-regular fa-heart icon-gold"></i>
+        <h3 id="v-2-title">NUTRIÇÃO</h3>
+        <p id="v-2-desc">Escolhas saudáveis que nutrem o corpo e a alma.</p>
       </div>
       <div class="feature-item">
-        <i class="fa-solid fa-leaf icon-gold"></i>
-        <h3>PRATICIDADE</h3>
-        <p>Opções práticas para o seu dia a dia, sem abrir mão do sabor.</p>
+        <i id="v-3-icon" class="fa-solid fa-leaf icon-gold"></i>
+        <h3 id="v-3-title">PRATICIDADE</h3>
+        <p id="v-3-desc">Opções práticas para o seu dia a dia, sem abrir mão do sabor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTÓRIA DA MARCA -->
+  <section class="historia" id="historia">
+    <div class="historia-content">
+      <span class="subtitle" id="h-subtitle">SOBRE NÓS</span>
+      <h2 id="h-title">Nossa História</h2>
+      <div class="divider"></div>
+      <div class="historia-text" id="h-text">
+        <p>A Dali nasceu de um amor profundo pelo café e pela experiência de compartilhar momentos especiais. Mais do que uma marca, somos um convite para desacelerar e saborear o melhor da vida.</p>
+        <p>Cada produto foi criado com cuidado e intenção — combinando nutrição, sabor e praticidade para que você possa criar memórias afetivas no café da manhã e no lanche da tarde.</p>
+        <p>Acreditamos que alimentação é afeto. Que um bom café pode transformar o início do dia. Que a pausa certa pode mudar tudo.</p>
+      </div>
+      <p class="signature" id="h-sig">Dali. Um encontro que transforma.</p>
+    </div>
+    <div class="historia-visual">
+      <div class="historia-img-wrap">
+        <img src="images/logo (2).png" alt="Dali — Nossa História" class="historia-logo-art">
       </div>
     </div>
   </section>
@@ -96,50 +137,50 @@
     </div>
   </section>
 
-  <section class="combinations">
-    <h2 class="section-title dark-text">COMBINAÇÕES QUE ENCANTAM</h2>
+  <section class="combinations" id="combinacoes">
+    <h2 class="section-title dark-text" id="c-title">COMBINAÇÕES QUE ENCANTAM</h2>
     <div class="cards-grid">
       <div class="card">
         <img src="images/biscoito de arroz com geleia de frutas vermelhas.png" alt="Biscoito de Arroz">
-        <p>Biscoito de arroz com<br>geleia de frutas vermelhas</p>
+        <p id="c-1-name">Biscoito de arroz com<br>geleia de frutas vermelhas</p>
       </div>
       <div class="card">
         <img src="images/torrada-cacau.jpg.png" alt="Torrada de Cacau">
-        <p>Torrada de cacau com<br>creme de amendoim</p>
+        <p id="c-2-name">Torrada de cacau com<br>creme de amendoim</p>
       </div>
       <div class="card">
         <img src="images/biscoitos.jpg.png" alt="Seleção Biscoitos">
-        <p>Seleção de biscoitos<br>artesanais</p>
+        <p id="c-3-name">Seleção de biscoitos<br>artesanais</p>
       </div>
     </div>
   </section>
 
   <section class="split-section">
     <div class="split-left">
-      <span class="subtitle">FRESCOR & ENERGIA</span>
-      <ul class="icon-list">
+      <span class="subtitle" id="frescor-title">FRESCOR &amp; ENERGIA</span>
+      <ul class="icon-list" id="frescor-list">
         <li><i class="fa-solid fa-bottle-water"></i> Água saborizada</li>
         <li><i class="fa-solid fa-bowl-food"></i> Iogurte com geleia e granola</li>
         <li><i class="fa-solid fa-apple-whole"></i> Mix de frutas com oleaginosas</li>
       </ul>
-      <p class="small-text">Incluímos também um pré-treino natural, ideal para quem busca disposição e vitalidade.</p>
+      <p class="small-text" id="frescor-info">Incluímos também um pré-treino natural, ideal para quem busca disposição e vitalidade.</p>
     </div>
     <div class="split-img">
       <img src="images/iorgute granola e geléia.png" alt="Iogurte com granola e geleia">
     </div>
     <div class="split-right">
-      <span class="subtitle">PARA O DIA A DIA</span>
-      <ul class="food-list">
-        <li><img src="https://placehold.co/50x30/444/777" alt="Sanduiche"> Bisnaguinha de cenoura com creme de avelã</li>
-        <li><img src="https://placehold.co/50x30/444/777" alt="Sanduiche"> Bisnaguinha integral com creme de queijo e ervas</li>
-        <li><img src="https://placehold.co/50x30/444/777" alt="Sanduiche"> Bisnaguinha com patê</li>
-        <li><img src="https://placehold.co/50x30/444/777" alt="Sanduiche"> Baguete de leite com salpicão</li>
-        <li><img src="https://placehold.co/50x30/444/777" alt="Sanduiche"> Baguete natural (peito de peru, queijo, alface e tomate)</li>
+      <span class="subtitle" id="diaadia-title">PARA O DIA A DIA</span>
+      <ul class="food-list" id="diaadia-list">
+        <li><img src="https://placehold.co/50x30/444/777" alt=""> <span id="d-1">Bisnaguinha de cenoura com creme de avelã</span></li>
+        <li><img src="https://placehold.co/50x30/444/777" alt=""> <span id="d-2">Bisnaguinha integral com creme de queijo e ervas</span></li>
+        <li><img src="https://placehold.co/50x30/444/777" alt=""> <span id="d-3">Bisnaguinha com patê</span></li>
+        <li><img src="https://placehold.co/50x30/444/777" alt=""> <span id="d-4">Baguete de leite com salpicão</span></li>
+        <li><img src="https://placehold.co/50x30/444/777" alt=""> <span id="d-5">Baguete natural (peito de peru, queijo, alface e tomate)</span></li>
       </ul>
     </div>
   </section>
 
-  <section class="boom-dali">
+  <section class="boom-dali" id="boom">
     <div class="boom-info">
       <span class="subtitle">O QUERIDINHO DA DALI</span>
       <h2>BOOM Dali</h2>
@@ -168,14 +209,14 @@
     </div>
   </section>
 
-  <section class="footer-cta">
+  <section class="footer-cta" id="contato">
     <div class="store-image">
       <img src="https://placehold.co/400x300/222/555?text=Loja+Fisica" alt="Interior Loja Dali">
     </div>
     <div class="cta-text">
-      <h2>MAIS QUE ALIMENTOS,<br>MOMENTOS.</h2>
-      <p>Aqui cada escolha tem propósito. Seja sozinha ou em boa companhia, seu momento Dali sempre será especial.</p>
-      <p class="signature">Dali. Tudo fácil pra você.</p>
+      <h2 id="cta-title">MAIS QUE ALIMENTOS,<br>MOMENTOS.</h2>
+      <p id="cta-text-p">Aqui cada escolha tem propósito. Seja sozinha ou em boa companhia, seu momento Dali sempre será especial.</p>
+      <p class="signature" id="cta-sig">Dali. Tudo fácil pra você.</p>
     </div>
     <div class="cta-box">
       <h3>PRONTA PARA VIVER ESSA EXPERIÊNCIA?</h3>
@@ -200,5 +241,133 @@
       FEITO COM <i class="fa-solid fa-heart"></i> PARA VOCÊ
     </div>
   </footer>
+
+  <script>
+    // ── Service Worker registration ──
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+
+    // ── Mobile hamburger menu ──
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+    const mobileClose = document.getElementById('mobile-nav-close');
+
+    function openMobileNav() {
+      mobileNav.classList.add('open');
+      mobileOverlay.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileNav() {
+      mobileNav.classList.remove('open');
+      mobileOverlay.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', openMobileNav);
+    mobileClose.addEventListener('click', closeMobileNav);
+    mobileOverlay.addEventListener('click', closeMobileNav);
+    document.querySelectorAll('.mobile-nav-link, .mobile-cta').forEach(l => l.addEventListener('click', closeMobileNav));
+
+    // ── Dynamic content from localStorage (populated by admin panel) ──
+    (function loadDaliContent() {
+      let data;
+      try { data = JSON.parse(localStorage.getItem('dali-data') || '{}'); } catch { return; }
+      if (!data || !Object.keys(data).length) return;
+
+      function setText(id, val) {
+        const el = document.getElementById(id);
+        if (el && val !== undefined && val !== '') el.textContent = val;
+      }
+      function setHTML(id, val) {
+        const el = document.getElementById(id);
+        if (el && val !== undefined && val !== '') el.innerHTML = val;
+      }
+
+      // Geral
+      const g = data.geral;
+      if (g) {
+        setText('tagline', g.tagline);
+        if (g.heroTitle) setHTML('hero-headline', g.heroTitle);
+        if (g.heroSub) {
+          const el = document.getElementById('hero-subtitle');
+          if (el) el.innerHTML = g.heroSub.replace(/\n/g, '<br>');
+        }
+        setText('hero-btn-text', g.heroBtn);
+        if (g.ctaTitle) setHTML('cta-title', g.ctaTitle);
+        setText('cta-text-p', g.ctaText);
+        setText('cta-sig', g.ctaSig);
+      }
+
+      // Historia
+      const h = data.historia;
+      if (h) {
+        setText('h-subtitle', h.subtitle);
+        setText('h-title', h.title);
+        if (h.text) {
+          const el = document.getElementById('h-text');
+          if (el) {
+            el.innerHTML = h.text.split('\n\n').map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+          }
+        }
+        setText('h-sig', h.sig);
+      }
+
+      // Valores
+      const v = data.valores;
+      if (v) {
+        setText('v-sec-sub', v.secSub);
+        setText('v-sec-title', v.secTitle);
+        setText('v-sec-desc', v.secDesc);
+        setText('v-sec-sig', v.secSig);
+        if (v.items) {
+          v.items.forEach((item, i) => {
+            const n = i + 1;
+            const iconEl = document.getElementById(`v-${n}-icon`);
+            if (iconEl && item.icon) {
+              iconEl.className = `fa-solid ${item.icon} icon-gold`;
+            }
+            setText(`v-${n}-title`, item.title);
+            setText(`v-${n}-desc`, item.desc);
+          });
+        }
+      }
+
+      // Combinações
+      const c = data.combinacoes;
+      if (c) {
+        setText('c-title', c.title);
+        if (c.items) {
+          c.items.forEach((item, i) => {
+            const el = document.getElementById(`c-${i + 1}-name`);
+            if (el && item.name) el.innerHTML = item.name.replace(/\n/g, '<br>');
+          });
+        }
+      }
+
+      // Cardápio
+      const k = data.cardapio;
+      if (k) {
+        if (k.frescor) {
+          const list = document.getElementById('frescor-list');
+          if (list) {
+            list.innerHTML = k.frescor.map(item =>
+              `<li><i class="fa-solid ${item.icon || 'fa-circle-dot'}"></i> ${item.name}</li>`
+            ).join('');
+          }
+        }
+        setText('frescor-info', k.frescorInfo);
+        if (k.diaDia) {
+          k.diaDia.forEach((name, i) => setText(`d-${i + 1}`, name));
+        }
+      }
+    })();
+  </script>
 </body>
 </html>

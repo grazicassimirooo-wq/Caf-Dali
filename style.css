@@ -581,6 +581,177 @@ footer {
   text-transform: uppercase;
 }
 
+/* ── Hamburger & Mobile Nav ── */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 99;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.mobile-nav-overlay.open {
+  display: block;
+  opacity: 1;
+}
+
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 280px;
+  height: 100%;
+  background: #0d0b0a;
+  border-left: 1px solid #2d2723;
+  z-index: 100;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mobile-nav.open {
+  right: 0;
+}
+
+.mobile-nav-close {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.mobile-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mobile-nav ul li {
+  border-bottom: 1px solid #2b2623;
+}
+
+.mobile-nav ul li a {
+  display: block;
+  padding: 1rem 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.mobile-nav .mobile-cta {
+  margin-top: 1.5rem;
+  text-align: center;
+  justify-content: center;
+  border-bottom: none !important;
+  border: none;
+}
+
+/* ── Historia da Marca ── */
+.historia {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  background: #0c0a09;
+  min-height: 380px;
+  border-top: 1px solid #1e1b18;
+  border-bottom: 1px solid #1e1b18;
+}
+
+.historia-content {
+  padding: 4rem 3rem 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.historia-content h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  margin: 0.6rem 0 0;
+  line-height: 1.1;
+}
+
+.historia-text p {
+  color: var(--muted);
+  line-height: 1.75;
+  margin: 1.2rem 0 0;
+  font-size: 1rem;
+}
+
+.historia-text p:first-child {
+  margin-top: 1.5rem;
+}
+
+.historia-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #100d0b 0%, #1a1410 100%);
+  padding: 3rem;
+}
+
+.historia-img-wrap {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2a1e14 0%, #0f0b09 100%);
+  border: 2px solid #3a2e24;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 60px rgba(229, 114, 0, 0.12);
+}
+
+.historia-logo-art {
+  width: 140px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(229,114,0,0.3));
+}
+
 /* ── Tablet largo (≤1200px) ── */
 @media (max-width: 1200px) {
   .boom-dali {
@@ -601,6 +772,7 @@ footer {
 /* ── Tablet (≤1024px) ── */
 @media (max-width: 1024px) {
   nav { display: none; }
+  .hamburger { display: flex; }
 
   .hero { aspect-ratio: 16 / 9; }
   .hero-content {
@@ -627,6 +799,12 @@ footer {
 
   .top-banner-inner { gap: 1rem; }
   .top-tagline { font-size: clamp(0.9rem, 2vw, 1.4rem); }
+}
+
+/* ── Tablet historia ── */
+@media (max-width: 1024px) {
+  .historia { grid-template-columns: 1fr; }
+  .historia-visual { min-height: 260px; }
 }
 
 /* ── Mobile largo (≤768px) ── */
@@ -675,6 +853,11 @@ footer {
   .footer-cta .store-image img { max-height: 220px; }
 
   footer { flex-direction: column; text-align: center; gap: 1rem; padding: 1rem; }
+
+  .historia-content { padding: 2.5rem 1.5rem; }
+  .historia-visual { padding: 2rem; min-height: 200px; }
+  .historia-img-wrap { width: 160px; height: 160px; }
+  .historia-logo-art { width: 100px; }
 }
 
 /* ── Mobile pequeno (≤480px) ── */
