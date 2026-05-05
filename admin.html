@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Dali</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════ LOGIN SCREEN ══════ -->
+  <div id="login-screen">
+    <div class="login-box">
+      <img src="images/logo (2).png" alt="Dali" class="login-logo">
+      <h1>Painel Administrativo</h1>
+      <p>Acesso restrito. Faça login para continuar.</p>
+      <form id="login-form" autocomplete="off">
+        <div class="field-group">
+          <label for="password-input">Senha</label>
+          <div class="input-wrap">
+            <input type="password" id="password-input" placeholder="Digite a senha" autocomplete="current-password">
+            <button type="button" id="toggle-pw" tabindex="-1" aria-label="Mostrar senha">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        <div id="login-error" class="error-msg" hidden>Senha incorreta. Tente novamente.</div>
+        <button type="submit" class="btn-accent">Entrar <i class="fa-solid fa-arrow-right"></i></button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ ADMIN PANEL ═══════ -->
+  <div id="admin-panel" hidden>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <img src="images/logo (2).png" alt="Dali">
+        <span>Admin</span>
+      </div>
+      <nav class="sidebar-nav" aria-label="Navegação admin">
+        <button class="nav-btn active" data-tab="geral">
+          <i class="fa-solid fa-sliders"></i> Geral
+        </button>
+        <button class="nav-btn" data-tab="historia">
+          <i class="fa-solid fa-book-open"></i> História da Marca
+        </button>
+        <button class="nav-btn" data-tab="valores">
+          <i class="fa-solid fa-star"></i> Nossos Valores
+        </button>
+        <button class="nav-btn" data-tab="combinacoes">
+          <i class="fa-solid fa-utensils"></i> Combinações
+        </button>
+        <button class="nav-btn" data-tab="cardapio">
+          <i class="fa-solid fa-list-ul"></i> Cardápio do Dia
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="index.html" target="_blank" class="btn-outline">
+          <i class="fa-solid fa-eye"></i> Ver Site
+        </a>
+        <button id="logout-btn" class="btn-ghost">
+          <i class="fa-solid fa-right-from-bracket"></i> Sair
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="admin-main">
+
+      <!-- Header -->
+      <header class="admin-header">
+        <h2 id="tab-title">Configurações Gerais</h2>
+        <button class="btn-reset" id="reset-btn">
+          <i class="fa-solid fa-rotate-left"></i> Redefinir padrões
+        </button>
+      </header>
+
+      <!-- ── Tab: Geral ─────────────────────────────────────────────────── -->
+      <section class="tab-panel active" id="tab-geral">
+
+        <div class="form-card">
+          <h3><i class="fa-solid fa-rectangle-ad"></i> Faixa Superior</h3>
+          <div class="field-group">
+            <label for="g-tagline">Tagline do topo</label>
+            <input type="text" id="g-tagline" placeholder="MAIS QUE CAFÉ, UM ENCONTRO">
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3><i class="fa-solid fa-film"></i> Seção Hero (vídeo)</h3>
+          <div class="field-group">
+            <label for="g-hero-title">Título principal <small>(aceita HTML básico: &lt;span&gt;, &lt;br&gt;)</small></label>
+            <textarea id="g-hero-title" rows="2" placeholder='Mais que <span class="highlight">café</span>,<br> um <span class="highlight">encontro.</span>'></textarea>
+          </div>
+          <div class="field-group">
+            <label for="g-hero-sub">Subtítulo (use Enter para novas linhas)</label>
+            <textarea id="g-hero-sub" rows="4" placeholder="Sabores que acolhem.&#10;Texturas que envolvem."></textarea>
+          </div>
+          <div class="field-group">
+            <label for="g-hero-btn">Texto do botão CTA</label>
+            <input type="text" id="g-hero-btn" placeholder="Quero Experimentar">
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3><i class="fa-solid fa-comment-dots"></i> Seção Final (Contato)</h3>
+          <div class="field-group">
+            <label for="g-cta-title">Título <small>(aceita &lt;br&gt;)</small></label>
+            <input type="text" id="g-cta-title" placeholder="MAIS QUE ALIMENTOS,&lt;br&gt;MOMENTOS.">
+          </div>
+          <div class="field-group">
+            <label for="g-cta-text">Texto descritivo</label>
+            <textarea id="g-cta-text" rows="3" placeholder="Aqui cada escolha tem propósito..."></textarea>
+          </div>
+          <div class="field-group">
+            <label for="g-cta-sig">Assinatura</label>
+            <input type="text" id="g-cta-sig" placeholder="Dali. Tudo fácil pra você.">
+          </div>
+        </div>
+
+        <button class="btn-save" data-section="geral">
+          <i class="fa-solid fa-floppy-disk"></i> Salvar Geral
+        </button>
+      </section>
+
+      <!-- ── Tab: História ──────────────────────────────────────────────── -->
+      <section class="tab-panel" id="tab-historia">
+
+        <div class="form-card">
+          <h3><i class="fa-solid fa-circle-info"></i> Seção "Sobre Nós"</h3>
+          <div class="two-col">
+            <div class="field-group">
+              <label for="h-subtitle">Subtítulo (laranja, acima do título)</label>
+              <input type="text" id="h-subtitle" placeholder="SOBRE NÓS">
+            </div>
+            <div class="field-group">
+              <label for="h-title">Título da seção</label>
+              <input type="text" id="h-title" placeholder="Nossa História">
+            </div>
+          </div>
+          <div class="field-group">
+            <label for="h-text">
+              Texto da história
+              <small> — separe parágrafos com uma linha em branco</small>
+            </label>
+            <textarea id="h-text" rows="12" placeholder="A Dali nasceu de um amor profundo pelo café...&#10;&#10;Cada produto foi criado com cuidado e intenção..."></textarea>
+          </div>
+          <div class="field-group">
+            <label for="h-sig">Assinatura (texto em itálico dourado)</label>
+            <input type="text" id="h-sig" placeholder="Dali. Um encontro que transforma.">
+          </div>
+        </div>
+
+        <button class="btn-save" data-section="historia">
+          <i class="fa-solid fa-floppy-disk"></i> Salvar História
+        </button>
+      </section>
+
+      <!-- ── Tab: Valores ───────────────────────────────────────────────── -->
+      <section class="tab-panel" id="tab-valores">
+
+        <div class="form-card">
+          <h3><i class="fa-solid fa-heading"></i> Cabeçalho da Seção</h3>
+          <div class="two-col">
+            <div class="field-group">
+              <label for="v-sec-sub">Subtítulo</label>
+              <input type="text" id="v-sec-sub" placeholder="MENU DEGUSTAÇÃO DALI">
+            </div>
+            <div class="field-group">
+              <label for="v-sec-sig">Assinatura</label>
+              <input type="text" id="v-sec-sig" placeholder="Tudo fácil pra você.">
+            </div>
+          </div>
+          <div class="field-group">
+            <label for="v-sec-title">Título</label>
+            <textarea id="v-sec-title" rows="2" placeholder="Um novo jeito de viver o café da manhã..."></textarea>
+          </div>
+          <div class="field-group">
+            <label for="v-sec-desc">Descrição</label>
+            <textarea id="v-sec-desc" rows="3" placeholder="Criamos o Menu Degustação..."></textarea>
+          </div>
+        </div>
+
+        <!-- Valor 1 -->
+        <div class="form-card">
+          <h3><i class="fa-solid fa-1"></i> Valor 1</h3>
+          <div class="two-col">
+            <div class="field-group">
+              <label for="v-1-title">Título</label>
+              <input type="text" id="v-1-title" placeholder="SABOR">
+            </div>
+            <div class="field-group">
+              <label for="v-1-icon">
+                Ícone
+                <small><a href="https://fontawesome.com/icons" target="_blank" rel="noopener" style="color:var(--accent)">ver ícones ↗</a></small>
+              </label>
+              <input type="text" id="v-1-icon" placeholder="fa-mug-saucer">
+              <div class="icon-preview" id="v-1-preview">
+                <i class="fa-solid fa-mug-saucer"></i>
+                <span>pré-visualização</span>
+              </div>
+            </div>
+          </div>
+          <div class="field-group">
+            <label for="v-1-desc">Descrição</label>
+            <textarea id="v-1-desc" rows="2" placeholder="Ingredientes selecionados para despertar sentidos."></textarea>
+          </div>
+        </div>
+
+        <!-- Valor 2 -->
+        <div class="form-card">
+          <h3><i class="fa-solid fa-2"></i> Valor 2</h3>
+          <div class="two-col">
+            <div class="field-group">
+              <label for="v-2-title">Título</label>
+              <input type="text" id="v-2-title" placeholder="NUTRIÇÃO">
+            </div>
+            <div class="field-group">
+              <label for="v-2-icon">Ícone</label>
+              <input type="text" id="v-2-icon" placeholder="fa-heart">
+              <div class="icon-preview" id="v-2-preview">
+                <i class="fa-solid fa-heart"></i>
+                <span>pré-visualização</span>
+              </div>
+            </div>
+          </div>
+          <div class="field-group">
+            <label for="v-2-desc">Descrição</label>
+            <textarea id="v-2-desc" rows="2" placeholder="Escolhas saudáveis que nutrem o corpo e a alma."></textarea>
+          </div>
+        </div>
+
+        <!-- Valor 3 -->
+        <div class="form-card">
+          <h3><i class="fa-solid fa-3"></i> Valor 3</h3>
+          <div class="two-col">
+            <div class="field-group">
+              <label for="v-3-title">Título</label>
+              <input type="text" id="v-3-title" placeholder="PRATICIDADE">
+            </div>
+            <div class="field-group">
+              <label for="v-3-icon">Ícone</label>
+              <input type="text" id="v-3-icon" placeholder="fa-leaf">
+              <div class="icon-preview" id="v-3-preview">
+                <i class="fa-solid fa-leaf"></i>
+                <span>pré-visualização</span>
+              </div>
+            </div>
+          </div>
+          <div class="field-group">
+            <label for="v-3-desc">Descrição</label>
+            <textarea id="v-3-desc" rows="2" placeholder="Opções práticas para o seu dia a dia..."></textarea>
+          </div>
+        </div>
+
+        <button class="btn-save" data-section="valores">
+          <i class="fa-solid fa-floppy-disk"></i> Salvar Valores
+        </button>
+      </section>
+
+      <!-- ── Tab: Combinações ───────────────────────────────────────────── -->
+      <section class="tab-panel" id="tab-combinacoes">
+
+        <div class="form-card">
+          <h3><i class="fa-solid fa-heading"></i> Título da Seção</h3>
+          <div class="field-group">
+            <label for="c-title">Título</label>
+            <input type="text" id="c-title" placeholder="COMBINAÇÕES QUE ENCANTAM">
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3><i class="fa-solid fa-1"></i> Combinação 1 — Biscoito</h3>
+          <div class="field-group">
+            <label for="c-1-name">Nome do produto (use Enter para quebra de linha)</label>
+            <textarea id="c-1-name" rows="2" placeholder="Biscoito de arroz com&#10;geleia de frutas vermelhas"></textarea>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3><i class="fa-solid fa-2"></i> Combinação 2 — Torrada</h3>
+          <div class="field-group">
+            <label for="c-2-name">Nome do produto</label>
+            <textarea id="c-2-name" rows="2" placeholder="Torrada de cacau com&#10;creme de amendoim"></textarea>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3><i class="fa-solid fa-3"></i> Combinação 3 — Biscoitos</h3>
+          <div class="field-group">
+            <label for="c-3-name">Nome do produto</label>
+            <textarea id="c-3-name" rows="2" placeholder="Seleção de biscoitos&#10;artesanais"></textarea>
+          </div>
+        </div>
+
+        <button class="btn-save" data-section="combinacoes">
+          <i class="fa-solid fa-floppy-disk"></i> Salvar Combinações
+        </button>
+      </section>
+
+      <!-- ── Tab: Cardápio do Dia ────────────────────────────────────────── -->
+      <section class="tab-panel" id="tab-cardapio">
+
+        <div class="form-card">
+          <h3><i class="fa-solid fa-droplet"></i> Frescor &amp; Energia — Itens</h3>
+          <div class="two-col">
+            <div class="field-group">
+              <label for="f-1-name">Item 1 — Nome</label>
+              <input type="text" id="f-1-name" placeholder="Água saborizada">
+            </div>
+            <div class="field-group">
+              <label for="f-1-icon">Item 1 — Ícone FA</label>
+              <input type="text" id="f-1-icon" placeholder="fa-bottle-water">
+            </div>
+          </div>
+          <div class="two-col">
+            <div class="field-group">
+              <label for="f-2-name">Item 2 — Nome</label>
+              <input type="text" id="f-2-name" placeholder="Iogurte com geleia e granola">
+            </div>
+            <div class="field-group">
+              <label for="f-2-icon">Item 2 — Ícone FA</label>
+              <input type="text" id="f-2-icon" placeholder="fa-bowl-food">
+            </div>
+          </div>
+          <div class="two-col">
+            <div class="field-group">
+              <label for="f-3-name">Item 3 — Nome</label>
+              <input type="text" id="f-3-name" placeholder="Mix de frutas com oleaginosas">
+            </div>
+            <div class="field-group">
+              <label for="f-3-icon">Item 3 — Ícone FA</label>
+              <input type="text" id="f-3-icon" placeholder="fa-apple-whole">
+            </div>
+          </div>
+          <div class="field-group">
+            <label for="f-info">Texto informativo (abaixo dos itens)</label>
+            <textarea id="f-info" rows="2" placeholder="Incluímos também um pré-treino natural..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3><i class="fa-solid fa-bread-slice"></i> Para o Dia a Dia — Itens do Cardápio</h3>
+          <div class="field-group">
+            <label for="d-1">Item 1</label>
+            <input type="text" id="d-1" placeholder="Bisnaguinha de cenoura com creme de avelã">
+          </div>
+          <div class="field-group">
+            <label for="d-2">Item 2</label>
+            <input type="text" id="d-2" placeholder="Bisnaguinha integral com creme de queijo e ervas">
+          </div>
+          <div class="field-group">
+            <label for="d-3">Item 3</label>
+            <input type="text" id="d-3" placeholder="Bisnaguinha com patê">
+          </div>
+          <div class="field-group">
+            <label for="d-4">Item 4</label>
+            <input type="text" id="d-4" placeholder="Baguete de leite com salpicão">
+          </div>
+          <div class="field-group">
+            <label for="d-5">Item 5</label>
+            <input type="text" id="d-5" placeholder="Baguete natural (peito de peru, queijo, alface e tomate)">
+          </div>
+        </div>
+
+        <button class="btn-save" data-section="cardapio">
+          <i class="fa-solid fa-floppy-disk"></i> Salvar Cardápio
+        </button>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Mobile sidebar toggle -->
+  <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Menu">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast" hidden>
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toast-msg">Salvo com sucesso!</span>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

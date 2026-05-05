@@ -926,6 +926,68 @@ footer {
 .reveal-stagger.revealed > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.41s; }
 .reveal-stagger.revealed > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.53s; }
 
+/* ── Historia da Marca ── */
+.historia {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  background: #0c0a09;
+  min-height: 380px;
+  border-top: 1px solid #1e1b18;
+  border-bottom: 1px solid #1e1b18;
+}
+
+.historia-content {
+  padding: 4rem 3rem 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.historia-content h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  margin: 0.6rem 0 0;
+  line-height: 1.1;
+}
+
+.historia-text p {
+  color: var(--muted);
+  line-height: 1.75;
+  margin: 1.2rem 0 0;
+  font-size: 1rem;
+}
+
+.historia-text p:first-child {
+  margin-top: 1.5rem;
+}
+
+.historia-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #100d0b 0%, #1a1410 100%);
+  padding: 3rem;
+}
+
+.historia-img-wrap {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2a1e14 0%, #0f0b09 100%);
+  border: 2px solid #3a2e24;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 60px rgba(229, 114, 0, 0.12);
+}
+
+.historia-logo-art {
+  width: 140px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(229,114,0,0.3));
+}
+
 /* ── Responsive: Tablet largo (≤1200px) ── */
 @media (max-width: 1200px) {
   .boom-dali {
@@ -977,6 +1039,11 @@ footer {
 
   .top-banner-inner { gap: 1rem; }
   .top-tagline { font-size: clamp(0.9rem, 2vw, 1.4rem); }
+}
+
+@media (max-width: 1024px) {
+  .historia { grid-template-columns: 1fr; }
+  .historia-visual { min-height: 260px; }
 }
 
 /* ── Responsive: Mobile largo (≤768px) ── */
@@ -1033,6 +1100,11 @@ footer {
   .cta-box { margin: 0 0 1.2rem; }
 
   footer { flex-direction: column; text-align: center; gap: 1rem; padding: 1.2rem 1rem; }
+
+  .historia-content { padding: 2.5rem 1.5rem; }
+  .historia-visual { padding: 2rem; min-height: 200px; }
+  .historia-img-wrap { width: 160px; height: 160px; }
+  .historia-logo-art { width: 100px; }
 }
 
 /* ── Responsive: Mobile pequeno (≤480px) ── */
