@@ -867,7 +867,16 @@ footer {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   border-top: 1px solid #2d2723;
+  position: relative;
 }
+
+.admin-access-link {
+  color: #2a2420;
+  font-size: 0.75rem;
+  transition: color 0.3s;
+  line-height: 1;
+}
+.admin-access-link:hover { color: var(--accent); }
 
 .footer-logo img {
   width: 88px;
