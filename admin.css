@@ -227,12 +227,21 @@ textarea { resize: vertical; }
   display: block;
 }
 
-.sidebar-logo span {
-  font-size: 0.7rem;
+.sidebar-brand {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  font-family: "Playfair Display", serif;
+}
+
+.sidebar-role {
+  display: block;
+  font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--accent);
 }
 
 .sidebar-nav {
@@ -411,23 +420,102 @@ textarea { resize: vertical; }
   color: var(--danger);
 }
 
-/* ─── Mobile sidebar toggle ─── */
-.sidebar-toggle {
-  display: none;
-  position: fixed;
-  bottom: 1.5rem;
-  left: 1.5rem;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: none;
-  color: #fff;
-  font-size: 1.1rem;
-  z-index: 50;
-  box-shadow: 0 4px 16px rgba(229,114,0,0.4);
+
+/* ─── Header layout ─── */
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sidebar-toggle-inline {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1rem;
+  padding: 0.25rem;
+  transition: color 0.2s;
+}
+.sidebar-toggle-inline:hover { color: var(--text); }
+
+.save-status {
+  font-size: 0.72rem;
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* ─── Status badge ─── */
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  border: 1px solid;
+}
+
+.status-badge.online  { color: var(--success); border-color: rgba(61,184,122,0.3); background: rgba(61,184,122,0.06); }
+.status-badge.offline { color: var(--danger);  border-color: rgba(217,64,64,0.3);  background: rgba(217,64,64,0.06); }
+.status-badge.local   { color: var(--muted);   border-color: var(--border);         background: transparent; }
+
+.status-badge i { font-size: 0.55rem; }
+
+/* ─── Firebase badge on login ─── */
+.firebase-status {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  margin: 0 auto 1.5rem;
+  width: fit-content;
+  font-weight: 500;
+}
+
+.firebase-on  { color: #f5a623; background: rgba(245,166,35,0.1); border: 1px solid rgba(245,166,35,0.25); }
+.firebase-off { color: var(--muted); background: var(--surface2); border: 1px solid var(--border); }
+
+/* ─── Input icon ─── */
+.input-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 0.78rem;
+  pointer-events: none;
+}
+
+.input-wrap input {
+  padding-left: 2.5rem;
+}
+
+/* ─── Login subtitle ─── */
+.login-subtitle {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+/* ─── Responsive ─── */
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
@@ -437,9 +525,10 @@ textarea { resize: vertical; }
     height: 100%;
   }
   .sidebar.open { left: 0; }
-  .sidebar-toggle { display: flex; align-items: center; justify-content: center; }
+  .sidebar-toggle-inline { display: flex; }
   .admin-main { width: 100%; }
   .tab-panel { padding: 1.25rem 1rem 3rem; }
   .admin-header { padding: 0.75rem 1rem; }
   .two-col { grid-template-columns: 1fr; }
+  .btn-text { display: none; }
 }
