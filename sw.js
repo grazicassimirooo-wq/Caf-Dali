@@ -1,4 +1,4 @@
-const CACHE = 'dali-v1';
+const CACHE = 'dali-v2';
 
 const STATIC = [
   '/',

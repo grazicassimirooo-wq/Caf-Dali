@@ -99,6 +99,8 @@ function fbErrorMessage(code) {
 
 async function loginUser(email, password) {
   showLoginError('');
+
+  // Legacy-only mode (Firebase not configured)
   if (!USE_FIREBASE) {
     if (password === LEGACY_PW) {
       sessionStorage.setItem(LEGACY_AUTH_KEY, '1');
@@ -109,23 +111,38 @@ async function loginUser(email, password) {
     }
     return;
   }
+
   setLoginLoading(true);
+
+  // Try Firebase Auth first; fall back to legacy password on failure
   try {
     await window.fbAuth.signInWithEmailAndPassword(email, password);
+    // onAuthStateChanged will call showPanel() on success
   } catch (err) {
-    showLoginError(fbErrorMessage(err.code));
-    setLoginLoading(false);
+    // If Firebase Auth is not yet enabled or fails, try legacy password
+    if (password === LEGACY_PW) {
+      setLoginLoading(false);
+      sessionStorage.setItem(LEGACY_AUTH_KEY, '1');
+      showPanel();
+      await loadAllForms();
+    } else {
+      showLoginError(fbErrorMessage(err.code));
+      setLoginLoading(false);
+    }
   }
 }
 
 function initAuth() {
   updateFirebaseBadge();
 
+  // Check legacy session first (works both in Firebase and local modes)
+  if (sessionStorage.getItem(LEGACY_AUTH_KEY) === '1') {
+    showPanel();
+    loadAllForms();
+    return;
+  }
+
   if (!USE_FIREBASE) {
-    if (sessionStorage.getItem(LEGACY_AUTH_KEY) === '1') {
-      showPanel();
-      loadAllForms();
-    }
     return;
   }
 

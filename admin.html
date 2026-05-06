@@ -31,7 +31,7 @@
 
       <form id="login-form" autocomplete="off" novalidate>
         <div class="field-group" id="email-group">
-          <label for="email-input">Email</label>
+          <label for="email-input">Email <small style="color:var(--muted);font-weight:400">(opcional até configurar Firebase Auth)</small></label>
           <div class="input-wrap">
             <i class="fa-solid fa-envelope input-icon"></i>
             <input type="email" id="email-input" placeholder="admin@dali.com" autocomplete="username">
@@ -46,6 +46,10 @@
               <i class="fa-solid fa-eye"></i>
             </button>
           </div>
+        </div>
+        <div id="login-hint" class="login-hint-box">
+          <i class="fa-solid fa-circle-info"></i>
+          Senha padrão: <code>dali@2024</code>
         </div>
         <div id="login-error" class="error-msg" hidden></div>
         <button type="submit" class="btn-accent" id="login-btn">

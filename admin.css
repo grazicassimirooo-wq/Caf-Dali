@@ -109,6 +109,29 @@ textarea { resize: vertical; }
   line-height: 1;
 }
 
+.login-hint-box {
+  background: rgba(229, 114, 0, 0.08);
+  border: 1px solid rgba(229, 114, 0, 0.25);
+  border-radius: 8px;
+  padding: 0.6rem 0.85rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-align: left;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.login-hint-box i { color: var(--accent); flex-shrink: 0; }
+.login-hint-box code {
+  background: rgba(229,114,0,0.15);
+  color: var(--accent);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-family: monospace;
+}
+
 .error-msg {
   color: var(--danger);
   font-size: 0.78rem;
