@@ -546,8 +546,56 @@ function showToast(msg, isError = false) {
 // ─── Init ─────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Login form
-  document.getElementById('login-form').addEventListener('submit', async e => {
+  // ── Acesso direto por senha local ────────────────────────────────────────
+  async function directLogin() {
+    const input   = document.getElementById('direct-pw-input');
+    const btn     = document.getElementById('direct-login-btn');
+    const errEl   = document.getElementById('direct-error');
+    const spinner = document.getElementById('direct-spinner');
+    const pw      = (input?.value || '').trim();
+
+    errEl.hidden = true;
+    btn.disabled = true;
+    if (spinner) spinner.hidden = false;
+
+    if (pw === LEGACY_PW) {
+      sessionStorage.setItem(LEGACY_AUTH_KEY, '1');
+      showPanel();
+      await loadAllForms();
+    } else if (USE_FIREBASE && pw) {
+      // Try Firebase with email from advanced form as fallback
+      try {
+        const email = (document.getElementById('email-input')?.value || '').trim();
+        await window.fbAuth.signInWithEmailAndPassword(email || pw, pw);
+        // onAuthStateChanged handles showPanel on success
+      } catch {
+        errEl.textContent = 'Senha incorreta. Tente: dali@2024';
+        errEl.hidden = false;
+        btn.disabled = false;
+        if (spinner) spinner.hidden = true;
+      }
+    } else {
+      errEl.textContent = 'Senha incorreta. A senha padrão é: dali@2024';
+      errEl.hidden = false;
+      btn.disabled = false;
+      if (spinner) spinner.hidden = true;
+    }
+
+    if (btn.disabled && errEl.hidden) {
+      // success path already showed panel
+    } else if (!errEl.hidden) {
+      btn.disabled = false;
+    }
+    if (spinner) spinner.hidden = true;
+  }
+
+  document.getElementById('direct-login-btn')?.addEventListener('click', directLogin);
+  document.getElementById('direct-pw-input')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); directLogin(); }
+  });
+
+  // ── Firebase login form (avançado) ──────────────────────────────────────
+  document.getElementById('login-form')?.addEventListener('submit', async e => {
     e.preventDefault();
     const email = (document.getElementById('email-input')?.value || '').trim();
     const pw    = document.getElementById('password-input').value;

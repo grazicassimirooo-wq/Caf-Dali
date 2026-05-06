@@ -109,6 +109,54 @@ textarea { resize: vertical; }
   line-height: 1;
 }
 
+.login-direct-box {
+  margin-bottom: 1rem;
+}
+
+.login-direct-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.login-direct-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.login-advanced {
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  margin-top: 0.25rem;
+}
+
+.login-advanced summary {
+  font-size: 0.75rem;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.login-advanced summary::before {
+  content: '\f078';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 0.6rem;
+  transition: transform 0.2s;
+}
+
+.login-advanced[open] summary::before {
+  transform: rotate(180deg);
+}
+
+.login-advanced summary:hover { color: var(--text); }
+
 .login-hint-box {
   background: rgba(229, 114, 0, 0.08);
   border: 1px solid rgba(229, 114, 0, 0.25);
