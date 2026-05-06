@@ -555,3 +555,105 @@ textarea { resize: vertical; }
   .two-col { grid-template-columns: 1fr; }
   .btn-text { display: none; }
 }
+
+/* ─── Avaliações (reviews) ─── */
+.reviews-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.reviews-info-text {
+  font-size: 0.78rem;
+  color: var(--muted);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.reviews-info-text i { color: var(--accent); margin-top: 0.1rem; flex-shrink: 0; }
+
+.nav-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--danger);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  padding: 0 4px;
+  margin-left: auto;
+}
+
+.count-badge-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.review-admin-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.reviews-empty {
+  color: var(--muted);
+  font-size: 0.82rem;
+  text-align: center;
+  padding: 1.25rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.review-admin-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  transition: border-color 0.2s;
+}
+
+.review-admin-card:hover { border-color: rgba(229,114,0,0.3); }
+
+.rac-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.rac-stars { color: #e5a020; font-size: 0.78rem; letter-spacing: 0.1em; }
+.rac-date  { font-size: 0.7rem; color: var(--muted); }
+
+.rac-text {
+  color: var(--text);
+  font-size: 0.85rem;
+  line-height: 1.65;
+  margin: 0 0 0.4rem;
+}
+
+.rac-author {
+  font-size: 0.74rem;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.rac-actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}

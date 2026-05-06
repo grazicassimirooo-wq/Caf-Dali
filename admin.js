@@ -219,6 +219,145 @@ function mergeDefaults(data) {
   return out;
 }
 
+// ─── Reviews management ───────────────────────────────────────────────────────
+function escHtml(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+async function loadReviews() {
+  const pendingList  = document.getElementById('pending-list');
+  const approvedList = document.getElementById('approved-list');
+  if (!pendingList || !approvedList) return;
+
+  const spinner = '<p class="reviews-empty"><i class="fa-solid fa-spinner fa-spin"></i> Carregando...</p>';
+  pendingList.innerHTML = approvedList.innerHTML = spinner;
+
+  let reviews = [];
+  if (USE_FIREBASE && window.fbDb) {
+    try {
+      const snap = await window.fbDb.collection('dali-reviews').orderBy('createdAt', 'desc').get();
+      reviews = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    } catch {
+      // Firestore may require authentication — fall back to localStorage
+      reviews = _localReviews();
+    }
+  } else {
+    reviews = _localReviews();
+  }
+
+  const pending  = reviews.filter(r => !r.approved);
+  const approved = reviews.filter(r =>  r.approved);
+
+  _updateReviewBadge(pending.length);
+  _setCountLabel('pending-count-label',  pending.length,  'pendente');
+  _setCountLabel('approved-count-label', approved.length, 'publicada');
+
+  _renderList(pendingList,  pending,  false);
+  _renderList(approvedList, approved, true);
+}
+
+function _localReviews() {
+  try { return JSON.parse(localStorage.getItem('dali-reviews') || '[]'); } catch { return []; }
+}
+
+function _updateReviewBadge(n) {
+  const badge = document.getElementById('pending-badge');
+  if (!badge) return;
+  badge.textContent = n;
+  badge.hidden = n === 0;
+}
+
+function _setCountLabel(id, count, noun) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = count ? ` (${count} ${noun}${count > 1 ? 's' : ''})` : '';
+}
+
+function _renderList(container, reviews, isApproved) {
+  if (!reviews.length) {
+    container.innerHTML = `<p class="reviews-empty">${isApproved ? 'Nenhuma avaliação publicada ainda.' : 'Nenhuma avaliação pendente.'}</p>`;
+    return;
+  }
+  container.innerHTML = '';
+  reviews.forEach(r => {
+    const stars = Array.from({length:5}, (_,i) => `<i class="fa-${i < (r.stars||5) ? 'solid' : 'regular'} fa-star"></i>`).join('');
+    const ts    = r.createdAt?.seconds ? new Date(r.createdAt.seconds * 1000) : r.createdAt ? new Date(r.createdAt) : null;
+    const date  = ts ? ts.toLocaleDateString('pt-BR') : '';
+
+    const card = document.createElement('div');
+    card.className = 'review-admin-card';
+    card.dataset.id = r.id;
+    card.innerHTML = `
+      <div class="rac-top">
+        <span class="rac-stars">${stars}</span>
+        <span class="rac-date">${date}</span>
+      </div>
+      <p class="rac-text">${escHtml(r.text)}</p>
+      <span class="rac-author">— ${escHtml(r.author || 'Anônimo')}</span>
+      <div class="rac-actions">
+        ${!isApproved ? `<button class="btn-save rac-approve" style="margin-top:0;padding:.45rem .9rem;font-size:.76rem"><i class="fa-solid fa-check"></i> Aprovar</button>` : ''}
+        <button class="btn-outline rac-edit"><i class="fa-solid fa-pen"></i> Editar</button>
+        <button class="btn-ghost rac-delete"><i class="fa-solid fa-trash"></i> Excluir</button>
+      </div>`;
+
+    card.querySelector('.rac-delete')?.addEventListener('click', () => _deleteReview(r.id));
+    card.querySelector('.rac-edit')?.addEventListener('click',   () => _editReview(r));
+    card.querySelector('.rac-approve')?.addEventListener('click',() => _approveReview(r.id));
+    container.appendChild(card);
+  });
+}
+
+async function _approveReview(id) {
+  if (USE_FIREBASE && window.fbDb) {
+    try { await window.fbDb.collection('dali-reviews').doc(id).update({ approved: true }); }
+    catch { _approveLocal(id); }
+  } else { _approveLocal(id); }
+  showToast('Avaliação aprovada e publicada!');
+  loadReviews();
+}
+
+function _approveLocal(id) {
+  const list = _localReviews();
+  const idx  = list.findIndex(r => r.id === id);
+  if (idx >= 0) { list[idx].approved = true; localStorage.setItem('dali-reviews', JSON.stringify(list)); }
+}
+
+async function _deleteReview(id) {
+  if (!confirm('Excluir esta avaliação permanentemente?')) return;
+  if (USE_FIREBASE && window.fbDb) {
+    try { await window.fbDb.collection('dali-reviews').doc(id).delete(); }
+    catch { _deleteLocal(id); }
+  } else { _deleteLocal(id); }
+  showToast('Avaliação excluída.');
+  loadReviews();
+}
+
+function _deleteLocal(id) {
+  localStorage.setItem('dali-reviews', JSON.stringify(_localReviews().filter(r => r.id !== id)));
+}
+
+async function _editReview(r) {
+  const newText   = prompt('Editar texto da avaliação:', r.text);
+  if (newText === null) return;
+  const newAuthor = prompt('Editar nome do cliente:', r.author || '');
+  if (newAuthor === null) return;
+
+  const update = { text: newText.trim(), author: (newAuthor.trim() || 'Anônimo') };
+
+  if (USE_FIREBASE && window.fbDb) {
+    try { await window.fbDb.collection('dali-reviews').doc(r.id).update(update); }
+    catch { _editLocal(r.id, update); }
+  } else { _editLocal(r.id, update); }
+  showToast('Avaliação atualizada!');
+  loadReviews();
+}
+
+function _editLocal(id, update) {
+  const list = _localReviews();
+  const idx  = list.findIndex(r => r.id === id);
+  if (idx >= 0) { Object.assign(list[idx], update); localStorage.setItem('dali-reviews', JSON.stringify(list)); }
+}
+
 // ─── Tab management ───────────────────────────────────────────────────────────
 const TAB_TITLES = {
   geral:       'Configurações Gerais',
@@ -226,6 +365,7 @@ const TAB_TITLES = {
   valores:     'Nossos Valores',
   combinacoes: 'Menu — Combinações',
   cardapio:    'Cardápio do Dia',
+  avaliacoes:  'Avaliações dos Clientes',
 };
 
 function switchTab(name) {
@@ -429,8 +569,12 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       switchTab(btn.dataset.tab);
       document.querySelector('.sidebar')?.classList.remove('open');
+      if (btn.dataset.tab === 'avaliacoes') loadReviews();
     });
   });
+
+  // Reviews refresh button
+  document.getElementById('refresh-reviews-btn')?.addEventListener('click', loadReviews);
 
   // Save buttons
   document.querySelectorAll('.btn-save').forEach(btn => {

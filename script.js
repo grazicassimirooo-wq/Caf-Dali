@@ -182,7 +182,99 @@ function initDepoimentos(reviews) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => initDepoimentos(DEFAULT_REVIEWS));
+// ── Star rating picker ────────────────────────────────────────────────────────
+function initStarRating() {
+  const stars = document.querySelectorAll('.rs-star');
+  const input = document.getElementById('review-stars-val');
+  if (!stars.length || !input) return;
+  let current = 0;
+
+  function paint(n) {
+    stars.forEach(s => {
+      const v = +s.dataset.v;
+      s.classList.toggle('fa-solid', v <= n);
+      s.classList.toggle('fa-regular', v > n);
+      s.classList.toggle('hovered', v <= n && n > current);
+    });
+  }
+
+  stars.forEach(s => {
+    s.addEventListener('mouseenter', () => paint(+s.dataset.v));
+    s.addEventListener('mouseleave', () => paint(current));
+    s.addEventListener('click', () => {
+      current = +s.dataset.v;
+      input.value = current;
+      paint(current);
+    });
+    s.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); s.click(); }
+    });
+  });
+}
+
+// ── Review form submission ─────────────────────────────────────────────────────
+function showReviewMsg(msg, type) {
+  const el = document.getElementById('review-msg');
+  if (!el) return;
+  el.innerHTML = (type === 'success' ? '<i class="fa-solid fa-circle-check"></i> ' : '<i class="fa-solid fa-circle-xmark"></i> ') + msg;
+  el.className = `review-msg ${type}`;
+  el.hidden = false;
+  if (type === 'success') setTimeout(() => { el.hidden = true; }, 7000);
+}
+
+function initReviewForm() {
+  const form = document.getElementById('review-form');
+  if (!form) return;
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const stars  = +(document.getElementById('review-stars-val')?.value || 0);
+    const author = (document.getElementById('review-author')?.value || '').trim();
+    const text   = (document.getElementById('review-text')?.value || '').trim();
+    const btn    = document.getElementById('review-submit-btn');
+
+    if (!stars) { showReviewMsg('Selecione uma nota antes de enviar.', 'error'); return; }
+    if (text.length < 10) { showReviewMsg('Escreva pelo menos 10 caracteres na avaliação.', 'error'); return; }
+
+    const origHTML = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
+
+    try {
+      if (window.FIREBASE_CONFIGURED && window.fbDb) {
+        await window.fbDb.collection('dali-reviews').add({
+          stars,
+          author: author || 'Anônimo',
+          text,
+          approved: false,
+          createdAt: new Date()
+        });
+      } else {
+        const stored = JSON.parse(localStorage.getItem('dali-reviews') || '[]');
+        stored.unshift({ id: String(Date.now()), stars, author: author || 'Anônimo', text, approved: false, createdAt: Date.now() });
+        localStorage.setItem('dali-reviews', JSON.stringify(stored));
+      }
+      showReviewMsg('Avaliação enviada! Ela será revisada antes de aparecer. Obrigada!', 'success');
+      form.reset();
+      document.getElementById('review-stars-val').value = '0';
+      document.querySelectorAll('.rs-star').forEach(s => {
+        s.classList.remove('fa-solid', 'hovered');
+        s.classList.add('fa-regular');
+      });
+    } catch {
+      showReviewMsg('Erro ao enviar. Tente novamente.', 'error');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = origHTML;
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initDepoimentos(DEFAULT_REVIEWS);
+  initStarRating();
+  initReviewForm();
+});
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
