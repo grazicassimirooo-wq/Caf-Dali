@@ -22,12 +22,12 @@
 // ──────────────────────────────────────────────────────────────────────────────
 
 const firebaseConfig = {
-  apiKey:            "YOUR_API_KEY",
-  authDomain:        "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId:         "YOUR_PROJECT_ID",
-  storageBucket:     "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId:             "YOUR_APP_ID"
+  apiKey:            "AIzaSyA8zNLvZN68bnoZXhxWWootvvLLCMBDPhM",
+  authDomain:        "dali-caf.firebaseapp.com",
+  projectId:         "dali-caf",
+  storageBucket:     "dali-caf.firebasestorage.app",
+  messagingSenderId: "571361531987",
+  appId:             "1:571361531987:web:561e13f39aff3c29770ea6"
 };
 
 window.FIREBASE_CONFIGURED = !firebaseConfig.apiKey.startsWith('YOUR_');
