@@ -772,6 +772,150 @@ nav ul li a:hover::after {
   object-position: center top;
 }
 
+/* ── Enviar Avaliação ── */
+.review-submit {
+  background: #0a0908;
+  padding: 4.5rem 2rem;
+  text-align: center;
+  border-top: 1px solid #1e1b18;
+}
+
+.review-submit-inner {
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.review-submit-header {
+  margin-bottom: 2rem;
+}
+
+.review-submit-header h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  margin: 0.4rem 0 0.6rem;
+  line-height: 1.15;
+}
+
+.review-submit-header h2 strong {
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.review-submit-header p {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin: 0;
+}
+
+.review-form {
+  background: #111009;
+  border: 1px solid #2d2926;
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: left;
+}
+
+.review-star-pick {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.review-star-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.review-stars-row {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.rs-star {
+  font-size: 1.6rem;
+  color: #3a3330;
+  cursor: pointer;
+  transition: color 0.15s, transform 0.15s;
+  user-select: none;
+}
+
+.rs-star.hovered,
+.rs-star.fa-solid {
+  color: #e5a020;
+}
+
+.rs-star:focus-visible {
+  outline: 2px solid var(--accent);
+  border-radius: 2px;
+}
+
+.review-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.review-fields input,
+.review-fields textarea {
+  background: #0d0b0a;
+  border: 1px solid #2d2926;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: none;
+}
+
+.review-fields input::placeholder,
+.review-fields textarea::placeholder { color: #5a5450; }
+
+.review-fields input:focus,
+.review-fields textarea:focus { border-color: var(--accent); }
+
+.review-msg {
+  font-size: 0.82rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  line-height: 1.5;
+}
+
+.review-msg.success {
+  background: rgba(61, 184, 122, 0.1);
+  border: 1px solid rgba(61, 184, 122, 0.3);
+  color: #3db87a;
+}
+
+.review-msg.error {
+  background: rgba(217, 64, 64, 0.1);
+  border: 1px solid rgba(217, 64, 64, 0.3);
+  color: #d94040;
+}
+
+.review-submit-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+}
+
+@media (max-width: 600px) {
+  .review-submit { padding: 3rem 1rem; }
+  .review-form { padding: 1.5rem 1.1rem; }
+}
+
 /* ── Depoimentos ── */
 .depoimentos {
   background: #0c0a09;

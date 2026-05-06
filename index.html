@@ -227,6 +227,38 @@
     </div>
   </section>
 
+  <!-- ENVIAR AVALIAÇÃO -->
+  <section class="review-submit reveal" id="avaliacao">
+    <div class="review-submit-inner">
+      <div class="review-submit-header">
+        <span class="subtitle">COMPARTILHE SUA EXPERIÊNCIA</span>
+        <h2>Deixe sua <strong>avaliação</strong></h2>
+        <p>Sua opinião ajuda outras pessoas a descobrirem a Dali.</p>
+      </div>
+      <form id="review-form" class="review-form" novalidate>
+        <div class="review-star-pick">
+          <span class="review-star-label">Sua nota:</span>
+          <div class="review-stars-row" id="star-pick" role="group" aria-label="Nota de 1 a 5 estrelas">
+            <i class="fa-regular fa-star rs-star" data-v="1" tabindex="0" role="button" aria-label="1 estrela"></i>
+            <i class="fa-regular fa-star rs-star" data-v="2" tabindex="0" role="button" aria-label="2 estrelas"></i>
+            <i class="fa-regular fa-star rs-star" data-v="3" tabindex="0" role="button" aria-label="3 estrelas"></i>
+            <i class="fa-regular fa-star rs-star" data-v="4" tabindex="0" role="button" aria-label="4 estrelas"></i>
+            <i class="fa-regular fa-star rs-star" data-v="5" tabindex="0" role="button" aria-label="5 estrelas"></i>
+          </div>
+          <input type="hidden" id="review-stars-val" value="0">
+        </div>
+        <div class="review-fields">
+          <input type="text" id="review-author" placeholder="Seu nome (ex: Ana S.)" maxlength="60">
+          <textarea id="review-text" rows="3" placeholder="Conte sua experiência com a Dali..." maxlength="400" required></textarea>
+        </div>
+        <div id="review-msg" class="review-msg" hidden></div>
+        <button type="submit" class="btn-primary review-submit-btn" id="review-submit-btn">
+          <i class="fa-solid fa-paper-plane"></i> Enviar avaliação
+        </button>
+      </form>
+    </div>
+  </section>
+
   <!-- DEPOIMENTOS -->
   <section class="depoimentos reveal" id="depoimentos">
     <div class="dep-header">
@@ -375,20 +407,43 @@
       }
     }
 
+    // ── Load approved reviews into carousel ──────────────────────────────────
+    function loadApprovedReviews() {
+      if (window.FIREBASE_CONFIGURED && window.fbDb) {
+        window.fbDb.collection('dali-reviews')
+          .where('approved', '==', true)
+          .orderBy('createdAt', 'desc')
+          .get()
+          .then(snap => {
+            if (!snap.empty && typeof initDepoimentos === 'function') {
+              initDepoimentos(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+            }
+          })
+          .catch(() => {});
+      } else {
+        try {
+          const stored = JSON.parse(localStorage.getItem('dali-reviews') || '[]');
+          const approved = stored.filter(r => r.approved);
+          if (approved.length && typeof initDepoimentos === 'function') {
+            initDepoimentos(approved);
+          }
+        } catch {}
+      }
+    }
+
     // ── Load from Firebase or localStorage ───────────────────────────────────
     function initContentLoader() {
       if (window.FIREBASE_CONFIGURED && window.CONTENT_DOC) {
-        // Real-time sync via Firestore — updates automatically when admin saves
         window.CONTENT_DOC.onSnapshot(
           snap => { if (snap.exists) applyDaliContent(snap.data()); },
           () => {
-            // Firestore unavailable: fall back to localStorage
             try { applyDaliContent(JSON.parse(localStorage.getItem('dali-data') || '{}')); } catch {}
           }
         );
+        loadApprovedReviews();
       } else {
-        // Firebase not configured: use localStorage fallback
         try { applyDaliContent(JSON.parse(localStorage.getItem('dali-data') || '{}')); } catch {}
+        loadApprovedReviews();
       }
     }
 

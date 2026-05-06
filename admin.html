@@ -90,6 +90,10 @@
         <button class="nav-btn" data-tab="cardapio">
           <i class="fa-solid fa-list-ul"></i> Cardápio do Dia
         </button>
+        <button class="nav-btn" data-tab="avaliacoes">
+          <i class="fa-solid fa-comment-dots"></i> Avaliações
+          <span id="pending-badge" class="nav-badge" hidden></span>
+        </button>
       </nav>
 
       <div class="sidebar-footer">
@@ -416,6 +420,41 @@
         <button class="btn-save" data-section="cardapio">
           <i class="fa-solid fa-floppy-disk"></i> Salvar Cardápio
         </button>
+      </section>
+
+      <!-- ── Tab: Avaliações ────────────────────────────────────────────────── -->
+      <section class="tab-panel" id="tab-avaliacoes">
+
+        <div class="reviews-toolbar">
+          <p class="reviews-info-text">
+            <i class="fa-solid fa-circle-info"></i>
+            As avaliações enviadas pelos clientes ficam pendentes até você aprovar. Somente as aprovadas aparecem no site.
+          </p>
+          <button class="btn-outline" id="refresh-reviews-btn">
+            <i class="fa-solid fa-rotate"></i> Atualizar
+          </button>
+        </div>
+
+        <div class="form-card">
+          <h3>
+            <i class="fa-solid fa-clock"></i> Aguardando aprovação
+            <span id="pending-count-label" class="count-badge-label"></span>
+          </h3>
+          <div id="pending-list" class="review-admin-list">
+            <p class="reviews-empty"><i class="fa-solid fa-spinner fa-spin"></i> Carregando...</p>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>
+            <i class="fa-solid fa-circle-check"></i> Publicadas no site
+            <span id="approved-count-label" class="count-badge-label"></span>
+          </h3>
+          <div id="approved-list" class="review-admin-list">
+            <p class="reviews-empty"><i class="fa-solid fa-spinner fa-spin"></i> Carregando...</p>
+          </div>
+        </div>
+
       </section>
 
     </main>
