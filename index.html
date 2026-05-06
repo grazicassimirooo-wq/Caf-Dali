@@ -43,6 +43,7 @@
         <li><a href="#valores">Menu Degustação</a></li>
         <li><a href="#lanches">Lanches</a></li>
         <li><a href="#boom">Boom Dali</a></li>
+        <li><a href="#depoimentos">Clientes</a></li>
         <li><a href="#historia">Sobre Nós</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
@@ -67,6 +68,7 @@
         <li><a href="#valores" class="mobile-link">Menu Degustação</a></li>
         <li><a href="#lanches" class="mobile-link">Lanches</a></li>
         <li><a href="#boom" class="mobile-link">Boom Dali</a></li>
+        <li><a href="#depoimentos" class="mobile-link">Clientes</a></li>
         <li><a href="#historia" class="mobile-link">Sobre Nós</a></li>
         <li><a href="#contato" class="mobile-link">Contato</a></li>
       </ul>
@@ -225,6 +227,24 @@
     </div>
   </section>
 
+  <!-- DEPOIMENTOS -->
+  <section class="depoimentos reveal" id="depoimentos">
+    <div class="dep-header">
+      <span class="subtitle">NOSSOS CLIENTES</span>
+      <h2>O que dizem sobre <strong>a Dali</strong></h2>
+    </div>
+    <div class="dep-track-wrap">
+      <button class="dep-arrow dep-prev" aria-label="Depoimento anterior">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <div class="dep-track" id="dep-track"></div>
+      <button class="dep-arrow dep-next" aria-label="Próximo depoimento">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+    <div class="dep-dots" id="dep-dots"></div>
+  </section>
+
   <section class="footer-cta reveal" id="contato">
     <div class="store-image">
       <div class="store-visual">
@@ -348,6 +368,10 @@
         }
         setText('frescor-info', k.frescorInfo);
         if (k.diaDia) k.diaDia.forEach((name, i) => setText(`d-${i + 1}`, name));
+      }
+
+      if (data.depoimentos && Array.isArray(data.depoimentos) && data.depoimentos.length) {
+        initDepoimentos(data.depoimentos);
       }
     }
 
