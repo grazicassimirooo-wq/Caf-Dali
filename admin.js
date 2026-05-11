@@ -187,21 +187,32 @@ async function getData() {
   }
   try {
     const snap = await window.CONTENT_DOC.get();
-    return snap.exists ? snap.data() : {};
+    if (snap.exists) return snap.data();
+    // Firestore vazio — tenta localStorage como fallback
+    const local = JSON.parse(localStorage.getItem('dali-data') || '{}');
+    return local;
   } catch (e) {
-    console.error('[Admin] Firestore get:', e);
+    console.warn('[Admin] Firestore get falhou, usando localStorage:', e.message);
     setStatusBadge(false);
-    return {};
+    try { return JSON.parse(localStorage.getItem('dali-data') || '{}'); } catch { return {}; }
   }
 }
 
 async function writeData(data) {
-  if (!USE_FIREBASE) {
-    localStorage.setItem('dali-data', JSON.stringify(data));
-    return;
+  // Sempre salva em localStorage (garante que o site funciona mesmo sem Firebase Auth)
+  localStorage.setItem('dali-data', JSON.stringify(data));
+
+  if (!USE_FIREBASE) return;
+
+  // Tenta também salvar no Firestore (para sync em tempo real)
+  try {
+    await window.CONTENT_DOC.set(data);
+    setStatusBadge(true);
+  } catch (e) {
+    // Usuário não autenticado no Firebase — localStorage é suficiente
+    console.warn('[Admin] Firestore write falhou (ok se login foi por senha direta):', e.message);
+    setStatusBadge(false);
   }
-  await window.CONTENT_DOC.set(data);
-  setStatusBadge(true);
 }
 
 // ─── Deep merge with DEFAULTS ────────────────────────────────────────────────
