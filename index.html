@@ -433,18 +433,17 @@
 
     // ── Load from Firebase or localStorage ───────────────────────────────────
     function initContentLoader() {
+      // Aplica localStorage imediatamente (sem esperar rede)
+      try { applyDaliContent(JSON.parse(localStorage.getItem('dali-data') || '{}')); } catch {}
+
       if (window.FIREBASE_CONFIGURED && window.CONTENT_DOC) {
+        // Se Firestore tiver dados mais recentes, sobrescreve
         window.CONTENT_DOC.onSnapshot(
           snap => { if (snap.exists) applyDaliContent(snap.data()); },
-          () => {
-            try { applyDaliContent(JSON.parse(localStorage.getItem('dali-data') || '{}')); } catch {}
-          }
+          () => {} // localStorage já foi aplicado acima
         );
-        loadApprovedReviews();
-      } else {
-        try { applyDaliContent(JSON.parse(localStorage.getItem('dali-data') || '{}')); } catch {}
-        loadApprovedReviews();
       }
+      loadApprovedReviews();
     }
 
     // Wait for Firebase SDK to be ready before initialising
