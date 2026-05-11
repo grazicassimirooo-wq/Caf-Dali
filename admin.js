@@ -571,8 +571,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (pw === LEGACY_PW) {
       sessionStorage.setItem(LEGACY_AUTH_KEY, '1');
+      if (spinner) spinner.hidden = true;
+      btn.disabled = false;
       showPanel();
       await loadAllForms();
+      return;
     } else if (USE_FIREBASE && pw) {
       // Try Firebase with email from advanced form as fallback
       try {
@@ -664,14 +667,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Mobile sidebar toggle
-  const toggle  = document.getElementById('sidebar-toggle');
-  const sidebar = document.querySelector('.sidebar');
-  toggle?.addEventListener('click', () => sidebar?.classList.toggle('open'));
-  document.addEventListener('click', e => {
-    if (sidebar && !sidebar.contains(e.target) && !toggle?.contains(e.target)) {
-      sidebar.classList.remove('open');
-    }
+  // Mobile sidebar toggle (com overlay)
+  const toggle   = document.getElementById('sidebar-toggle');
+  const sidebar  = document.querySelector('.sidebar');
+  const sOverlay = document.getElementById('sidebar-overlay');
+
+  function openSidebar() {
+    sidebar?.classList.add('open');
+    sOverlay?.classList.add('show');
+  }
+  function closeSidebar() {
+    sidebar?.classList.remove('open');
+    sOverlay?.classList.remove('show');
+  }
+
+  toggle?.addEventListener('click', () => {
+    sidebar?.classList.contains('open') ? closeSidebar() : openSidebar();
+  });
+  sOverlay?.addEventListener('click', closeSidebar);
+
+  // Fechar ao trocar de aba no mobile
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (window.innerWidth <= 480) closeSidebar();
+    });
   });
 
   // Init auth
