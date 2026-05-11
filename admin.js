@@ -97,6 +97,13 @@ function fbErrorMessage(code) {
   return map[code] || 'Erro ao fazer login. Tente novamente.';
 }
 
+function withTimeout(promise, ms) {
+  const timer = new Promise((_, reject) =>
+    setTimeout(() => reject({ code: 'auth/network-request-failed' }), ms)
+  );
+  return Promise.race([promise, timer]);
+}
+
 async function loginUser(email, password) {
   showLoginError('');
 
@@ -112,23 +119,23 @@ async function loginUser(email, password) {
     return;
   }
 
+  // Legacy password always works regardless of Firebase
+  if (password === LEGACY_PW) {
+    setLoginLoading(false);
+    sessionStorage.setItem(LEGACY_AUTH_KEY, '1');
+    showPanel();
+    await loadAllForms();
+    return;
+  }
+
   setLoginLoading(true);
 
-  // Try Firebase Auth first; fall back to legacy password on failure
   try {
-    await window.fbAuth.signInWithEmailAndPassword(email, password);
+    await withTimeout(window.fbAuth.signInWithEmailAndPassword(email, password), 10000);
     // onAuthStateChanged will call showPanel() on success
   } catch (err) {
-    // If Firebase Auth is not yet enabled or fails, try legacy password
-    if (password === LEGACY_PW) {
-      setLoginLoading(false);
-      sessionStorage.setItem(LEGACY_AUTH_KEY, '1');
-      showPanel();
-      await loadAllForms();
-    } else {
-      showLoginError(fbErrorMessage(err.code));
-      setLoginLoading(false);
-    }
+    showLoginError(fbErrorMessage(err.code));
+    setLoginLoading(false);
   }
 }
 
@@ -569,6 +576,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.disabled = true;
     if (spinner) spinner.hidden = false;
 
+    // Senha local — acesso garantido sem depender do Firebase
     if (pw === LEGACY_PW) {
       sessionStorage.setItem(LEGACY_AUTH_KEY, '1');
       if (spinner) spinner.hidden = true;
@@ -576,33 +584,28 @@ document.addEventListener('DOMContentLoaded', () => {
       showPanel();
       await loadAllForms();
       return;
-    } else if (USE_FIREBASE && pw) {
-      // Try Firebase with email from advanced form as fallback
+    }
+
+    // Senha desconhecida — tenta Firebase se configurado, caso contrário erro
+    if (USE_FIREBASE && pw) {
       try {
         const email = (document.getElementById('email-input')?.value || '').trim();
-        await window.fbAuth.signInWithEmailAndPassword(email || pw, pw);
+        await withTimeout(window.fbAuth.signInWithEmailAndPassword(email || pw, pw), 10000);
         // onAuthStateChanged handles showPanel on success
         if (spinner) spinner.hidden = true;
         btn.disabled = false;
       } catch {
-        errEl.textContent = 'Senha incorreta. Tente: dali@2024';
+        errEl.textContent = 'Senha incorreta. Use a senha: dali@2024';
         errEl.hidden = false;
         btn.disabled = false;
         if (spinner) spinner.hidden = true;
       }
     } else {
-      errEl.textContent = 'Senha incorreta. A senha padrão é: dali@2024';
+      errEl.textContent = 'Senha incorreta. Use a senha: dali@2024';
       errEl.hidden = false;
       btn.disabled = false;
       if (spinner) spinner.hidden = true;
     }
-
-    if (btn.disabled && errEl.hidden) {
-      // success path already showed panel
-    } else if (!errEl.hidden) {
-      btn.disabled = false;
-    }
-    if (spinner) spinner.hidden = true;
   }
 
   document.getElementById('direct-login-btn')?.addEventListener('click', directLogin);
