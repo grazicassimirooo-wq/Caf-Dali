@@ -587,7 +587,20 @@ textarea { resize: vertical; }
 }
 
 /* ─── Responsive ─── */
-@media (max-width: 768px) {
+
+/* Overlay para quando o sidebar abre em tela pequena */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 39;
+  backdrop-filter: blur(2px);
+}
+
+.sidebar-overlay.show { display: block; }
+
+@media (max-width: 480px) {
   .sidebar {
     position: fixed;
     left: -260px;
