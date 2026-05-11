@@ -151,7 +151,7 @@ function initAuth() {
     if (user) {
       showPanel();
       await loadAllForms();
-    } else {
+    } else if (sessionStorage.getItem(LEGACY_AUTH_KEY) !== '1') {
       showLogin();
     }
   });
@@ -582,6 +582,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = (document.getElementById('email-input')?.value || '').trim();
         await window.fbAuth.signInWithEmailAndPassword(email || pw, pw);
         // onAuthStateChanged handles showPanel on success
+        if (spinner) spinner.hidden = true;
+        btn.disabled = false;
       } catch {
         errEl.textContent = 'Senha incorreta. Tente: dali@2024';
         errEl.hidden = false;
