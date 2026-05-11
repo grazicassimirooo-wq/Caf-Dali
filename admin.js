@@ -653,12 +653,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Logout
   document.getElementById('logout-btn')?.addEventListener('click', async () => {
+    sessionStorage.removeItem(LEGACY_AUTH_KEY);
     if (USE_FIREBASE) {
       await window.fbAuth.signOut();
-    } else {
-      sessionStorage.removeItem(LEGACY_AUTH_KEY);
-      showLogin();
     }
+    showLogin();
     document.getElementById('password-input').value = '';
     if (document.getElementById('email-input')) {
       document.getElementById('email-input').value = '';
